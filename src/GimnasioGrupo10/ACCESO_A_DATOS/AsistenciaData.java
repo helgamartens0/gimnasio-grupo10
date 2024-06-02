@@ -17,7 +17,7 @@ public class AsistenciaData {
     private Connection con = null;
 
     public AsistenciaData() {
-        con = helgafinal_prueba.ACCESO_A_DATOS.Conexion.getConexion();
+        con = Conexion.getConexion();
     }
 
     public void guardarAsistencia(Asistencia asistencia) {
