@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public class Membresia {
 
     private int id_membresia;
-    private int id_socio;
+    private Socio socio;
     private int cantidad_pases;
     private LocalDate fecha_inicio;
     private LocalDate fecha_fin;
@@ -19,8 +19,8 @@ public class Membresia {
     public Membresia() {
     }
 
-    public Membresia(int id_socio, int cantidad_pases, LocalDate fecha_inicio, LocalDate fecha_fin, double costo_membresia, boolean estado_membresia) {
-        this.id_socio = id_socio;
+    public Membresia(Socio socio, int cantidad_pases, LocalDate fecha_inicio, LocalDate fecha_fin, double costo_membresia, boolean estado_membresia) {
+        this.socio = socio;
         this.cantidad_pases = cantidad_pases;
         this.fecha_inicio = fecha_inicio;
         this.fecha_fin = fecha_fin;
@@ -28,9 +28,9 @@ public class Membresia {
         this.estado_membresia = estado_membresia;
     }
 
-    public Membresia(int id_membresia, int id_socio, int cantidad_pases, LocalDate fecha_inicio, LocalDate fecha_fin, double costo_membresia, boolean estado_membresia) {
+    public Membresia(int id_membresia, Socio socio, int cantidad_pases, LocalDate fecha_inicio, LocalDate fecha_fin, double costo_membresia, boolean estado_membresia) {
         this.id_membresia = id_membresia;
-        this.id_socio = id_socio;
+        this.socio = socio;
         this.cantidad_pases = cantidad_pases;
         this.fecha_inicio = fecha_inicio;
         this.fecha_fin = fecha_fin;
@@ -46,12 +46,12 @@ public class Membresia {
         this.id_membresia = id_membresia;
     }
 
-    public int getId_socio() {
-        return id_socio;
+    public Socio getSocio() {
+        return socio;
     }
 
-    public void setId_socio(int id_socio) {
-        this.id_socio = id_socio;
+    public void setSocio(Socio socio) {
+        this.socio = socio;
     }
 
     public int getCantidad_pases() {

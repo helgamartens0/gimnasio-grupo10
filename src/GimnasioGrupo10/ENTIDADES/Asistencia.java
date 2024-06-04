@@ -10,23 +10,23 @@ import java.time.LocalDate;
 
 public class Asistencia {
     private int id_asistencia;
-    private int id_socio;
-    private int id_clase;
+    private Socio socio;
+    private Clase clase;
     private LocalDate fecha_asistencia;
 
     public Asistencia() {
     }
 
-    public Asistencia(int id_socio, int id_clase, LocalDate fecha_asistencia) {
-        this.id_socio = id_socio;
-        this.id_clase = id_clase;
+    public Asistencia(Socio socio, Clase clase, LocalDate fecha_asistencia) {
+        this.socio = socio;
+        this.clase = clase;
         this.fecha_asistencia = fecha_asistencia;
     }
 
-    public Asistencia(int id_asistencia, int id_socio, int id_clase, LocalDate fecha_asistencia) {
+    public Asistencia(int id_asistencia, Socio socio, Clase clase, LocalDate fecha_asistencia) {
         this.id_asistencia = id_asistencia;
-        this.id_socio = id_socio;
-        this.id_clase = id_clase;
+        this.socio = socio;
+        this.clase = clase;
         this.fecha_asistencia = fecha_asistencia;
     }
 
@@ -38,20 +38,20 @@ public class Asistencia {
         this.id_asistencia = id_asistencia;
     }
 
-    public int getId_socio() {
-        return id_socio;
+    public Socio getSocio() {
+        return socio;
     }
 
-    public void setId_socio(int id_socio) {
-        this.id_socio = id_socio;
+    public void setSocio(Socio socio) {
+        this.socio = socio;
     }
 
-    public int getId_clase() {
-        return id_clase;
+    public Clase getClase() {
+        return clase;
     }
 
-    public void setId_clase(int id_clase) {
-        this.id_clase = id_clase;
+    public void setClase(Clase clase) {
+        this.clase = clase;
     }
 
     public LocalDate getFecha_asistencia() {

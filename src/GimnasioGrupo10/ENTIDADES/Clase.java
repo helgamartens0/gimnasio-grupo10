@@ -10,7 +10,7 @@ import java.time.LocalTime;
 public class Clase {
     private int id_clase;
     private String nombre_clase;
-    private int id_entrenador;
+    private Entrenador entrenador;
     private LocalTime hora_clase;
     private int capacidad_clase;
     private boolean estado_clase;
@@ -18,23 +18,22 @@ public class Clase {
     public Clase() {
     }
 
-    public Clase(int id_clase, String nombre_clase, int id_entrenador, LocalTime hora_clase, int capacidad_clase, boolean estado_clase) {
+    public Clase(int id_clase, String nombre_clase, Entrenador entrenador, LocalTime hora_clase, int capacidad_clase, boolean estado_clase) {
         this.id_clase = id_clase;
         this.nombre_clase = nombre_clase;
-        this.id_entrenador = id_entrenador;
+        this.entrenador = entrenador;
         this.hora_clase = hora_clase;
         this.capacidad_clase = capacidad_clase;
         this.estado_clase = estado_clase;
     }
 
-    public Clase(String nombre_clase, int id_entrenador, LocalTime hora_clase, int capacidad_clase, boolean estado_clase) {
+    public Clase(String nombre_clase, Entrenador entrenador, LocalTime hora_clase, int capacidad_clase, boolean estado_clase) {
         this.nombre_clase = nombre_clase;
-        this.id_entrenador = id_entrenador;
+        this.entrenador= entrenador;
         this.hora_clase = hora_clase;
         this.capacidad_clase = capacidad_clase;
         this.estado_clase = estado_clase;
     }
-
     public int getId_clase() {
         return id_clase;
     }
@@ -51,12 +50,12 @@ public class Clase {
         this.nombre_clase = nombre_clase;
     }
 
-    public int getId_entrenador() {
-        return id_entrenador;
+    public Entrenador getEntrenador() {
+        return entrenador;
     }
 
-    public void setId_entrenador(int id_entrenador) {
-        this.id_entrenador = id_entrenador;
+    public void setEntrenador(Entrenador entrenador) {
+        this.entrenador = entrenador;
     }
 
     public LocalTime getHora_clase() {
@@ -82,8 +81,5 @@ public class Clase {
     public void setEstado_clase(boolean estado_clase) {
         this.estado_clase = estado_clase;
     }
-    
-    
-    
     
 }

@@ -25,8 +25,8 @@ public class AsistenciaData {
                 + " VALUES (?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, asistencia.getId_socio());
-            ps.setInt(2, asistencia.getId_clase());
+            ps.setInt(1, asistencia.getSocio().getId_socio());
+            ps.setInt(2, asistencia.getClase().getId_clase());
             ps.setDate(3, Date.valueOf(asistencia.getFecha_asistencia()));
 
             ps.executeUpdate();
