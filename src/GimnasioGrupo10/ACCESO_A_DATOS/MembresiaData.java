@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  */
 public class MembresiaData {
 
-    private java.sql.Connection con;
+    private Connection con;
     private SocioData socData = new SocioData();
 
     public MembresiaData() {
