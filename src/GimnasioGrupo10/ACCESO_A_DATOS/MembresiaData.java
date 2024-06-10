@@ -32,8 +32,8 @@ public class MembresiaData {
             ps.setInt(1, membresia.getId_membresia());
             ps.setInt(2, membresia.getIdSocio());
             ps.setInt(3, membresia.getCantidad_pases());
-            ps.setDate(3, new java.sql.Date(membresia.getFecha_inicio().getTime()));
-            ps.setDate(4, new java.sql.Date(membresia.getFecha_fin().getTime()));
+            ps.setDate(3, new java.sql.Date(membresia.getFecha_inicio()));
+            ps.setDate(4, new java.sql.Date(membresia.getFecha_fin()));
             ps.setDouble(6, membresia.getCosto_membresia());
             ps.setBoolean(7, membresia.isEstado_membresia());
             ps.executeQuery();
