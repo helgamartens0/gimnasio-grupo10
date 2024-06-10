@@ -12,7 +12,9 @@ import GimnasioGrupo10.ACCESO_A_DATOS.MembresiaData;
 import GimnasioGrupo10.ACCESO_A_DATOS.SocioData;
 import GimnasioGrupo10.ENTIDADES.Clase;
 import GimnasioGrupo10.ENTIDADES.Entrenador;
+import GimnasioGrupo10.ENTIDADES.Membresia;
 import GimnasioGrupo10.ENTIDADES.Socio;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,12 +33,12 @@ public class GimnasioGrupo10 {
         MembresiaData memb = new MembresiaData();
         ClaseData clase = new ClaseData();
         /*----------------------------------------------------------------------------------------------------------------------------*/
-//        Socio socio2 = new Socio("41000222", "Pedro", "Gomez", 30, "pedro.gomez@example.com", "555444", true);
-//        Socio socio3 = new Socio("41000333", "Maria", "Lopez", 22, "maria.lopez@example.com", "666777", false);
-//        Socio socio4 = new Socio("41000444", "Juan", "Perez", 28, "juan.perez@example.com", "888999", true);
-//        Socio socio5 = new Socio("41000555", "Ana", "Martinez", 35, "ana.martinez@example.com", "333222", false);
-//        Socio socio6 = new Socio("41000666", "Juan", "Romero", 25, "juan.romero@example.com", "345222", true);
-//        Socio socio7 = new Socio("41000113", "María", "Gómez", 35, "maria@example.com", "777888", true);
+        Socio socio2 = new Socio("41000222", "Pedro", "Gomez", 30, "pedro.gomez@example.com", "555444", true);
+        Socio socio3 = new Socio("41000333", "Maria", "Lopez", 22, "maria.lopez@example.com", "666777", false);
+        Socio socio4 = new Socio("41000444", "Juan", "Perez", 28, "juan.perez@example.com", "888999", true);
+        Socio socio5 = new Socio("41000555", "Ana", "Martinez", 35, "ana.martinez@example.com", "333222", false);
+        Socio socio6 = new Socio("41000666", "Juan", "Romero", 25, "juan.romero@example.com", "345222", true);
+        Socio socio7 = new Socio("41000113", "María", "Gómez", 35, "maria@example.com", "777888", true);
 
         //  public Socio(String dni_socio, String nombre_socio, String apellido_socio, int edad_socio, String correo_socio, String telefono_socio, boolean estado_socio) {
 //        soc.cargarSocio(socio1);
@@ -76,13 +78,13 @@ public class GimnasioGrupo10 {
         Entrenador entrenador5 = new Entrenador(12, "556677889", "Christopher", "Davis", "Tenis", true);
         Entrenador entrenador6 = new Entrenador(13, "222333222", "Juan", "González", "Tenis", true);
         Entrenador entrenador7 = new Entrenador(14, "555444333", "María", "López", "Tenis", true);
-        ent.cargarEntrenador(entrenador1);
-        ent.cargarEntrenador(entrenador2);
-        ent.cargarEntrenador(entrenador3);
-        ent.cargarEntrenador(entrenador4);
-        ent.cargarEntrenador(entrenador5);
-        ent.cargarEntrenador(entrenador7);
-        ent.cargarEntrenador(entrenador6);
+//        ent.cargarEntrenador(entrenador1);
+//        ent.cargarEntrenador(entrenador2);
+//        ent.cargarEntrenador(entrenador3);
+//        ent.cargarEntrenador(entrenador4);
+//        ent.cargarEntrenador(entrenador5);
+//        ent.cargarEntrenador(entrenador7);
+//        ent.cargarEntrenador(entrenador6);
 //        ArrayList<Entrenador> entrenadorApellido = new ArrayList<>();
 //        entrenadorApellido = ent.buscarEntrenadorApellido("John");
 //        System.out.println("cantida de entrenadores con el apellido indicado: " + entrenadorApellido.size() + "\n");
@@ -178,6 +180,29 @@ public class GimnasioGrupo10 {
 //        if (clasehorario != null) {
 //            System.out.println(clasehorario.toString());
 //        }
+        Membresia membresia1 = new Membresia(socio2, 10, LocalDate.of(2024, 6, 1), LocalDate.of(2024, 12, 1), 200.0, true);
+        Membresia membresia2 = new Membresia(socio3, 5, LocalDate.of(2024, 6, 1), LocalDate.of(2024, 9, 1), 100.0, false);
+        Membresia membresia3 = new Membresia(socio4, 15, LocalDate.of(2024, 6, 1), LocalDate.of(2024, 12, 1), 300.0, true);
+        Membresia membresia4 = new Membresia(socio5, 20, LocalDate.of(2024, 6, 1), LocalDate.of(2025, 6, 1), 400.0, false);
+        Membresia membresia5 = new Membresia(socio6, 8, LocalDate.of(2024, 6, 1), LocalDate.of(2024, 8, 1), 160.0, true);
+        Membresia membresia6 = new Membresia(socio7, 15, LocalDate.of(2023, 6, 1), LocalDate.of(2024, 1, 1), 240.0, false);
+        Membresia membresia7 = new Membresia(socio7, 12, LocalDate.of(2024, 2, 1), LocalDate.of(2024, 6, 6), 240.0, true);
+
+        memb.cargarMembresia(membresia1);
+        memb.cargarMembresia(membresia2);
+        memb.cargarMembresia(membresia3);
+        memb.cargarMembresia(membresia4);
+        memb.cargarMembresia(membresia5);
+        memb.cargarMembresia(membresia6);
+        memb.cargarMembresia(membresia7);
+        List<Membresia> memSocio = memb.membresiaPorSocio(socio7.getId_socio());
+        if (!memSocio.isEmpty()) {
+            for (Membresia membresia : memSocio) {
+                System.out.println(membresia.toString());
+            }
+//        }
+            memb.renovarMembresia(2, LocalDate.of(2024, 1, 12), 50);
+            memb.cancelarMembresia(3);
 //public Asistencia(Socio socio, Clase clase, LocalDate fecha_asistencia) 
 //Clase clase2 = new Clase("Entrenamiento de Baloncesto de Tiro", entrenador2, LocalTime.parse("09:00"), 20, true);
 //        Socio socio2 = new Socio(8, "41000222", "Pedro", "Gomez", 30, "pedro.gomez@example.com", "555444", true);
@@ -186,6 +211,7 @@ public class GimnasioGrupo10 {
 //Socio socio3 = new Socio(9, "41000333", "Maria", "Lopez", 22, "maria.lopez@example.com", "666777", false);
 //        Asistencia asistencia2 = new Asistencia(socio3, clase2, LocalDate.of(2024, 10, 6));
 //        asist.guardarAsistencia(asistencia2);
-    }
+        }
 
+    }
 }

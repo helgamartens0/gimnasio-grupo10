@@ -47,7 +47,8 @@ public class MembresiaData {
             JOptionPane.showMessageDialog(null, "Membresia agregada con exito!!!");
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Membresia. " + ex);
+//            Logger.getLogger(MembresiaData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "error al acceder a la tabla Membresia");
         }
     }
 
@@ -78,7 +79,8 @@ public class MembresiaData {
                 membresias.add(membresia);
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Membresia. " + e);
+            System.out.println("error " + e);
+            JOptionPane.showMessageDialog(null, "error al acceder a la tabla Membresia");
 
         }
         return membresias;
@@ -96,7 +98,7 @@ public class MembresiaData {
             JOptionPane.showMessageDialog(null, "Membresia renovada con exito");
         } catch (Exception e) {
             System.out.println("error " + e);
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Membresia. " + e);
+            JOptionPane.showMessageDialog(null, "error al acceder a la tabla Membresia");
 
         }
     }
@@ -112,8 +114,9 @@ public class MembresiaData {
 
         } catch (SQLException e) {
             System.out.println("error " + e);
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Membresia. " + e);
+            JOptionPane.showMessageDialog(null, "error al acceder a la tabla Membresia");
 
         }
     }
 }
+
