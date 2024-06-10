@@ -24,7 +24,7 @@ import java.util.List;
 public class GimnasioGrupo10 {
 
     public static void main(String[] args) {
-  
+
         SocioData soc = new SocioData();
         EntrenadorData ent = new EntrenadorData();
         AsistenciaData asist = new AsistenciaData();
@@ -142,7 +142,6 @@ public class GimnasioGrupo10 {
         Clase clase9 = new Clase("Entrenamiento de Baloncesto de Defensa", entrenador2, LocalTime.parse("16:00"), 20, true);
         Clase clase10 = new Clase("Entrenamiento de Fútbol de Remates", entrenador1, LocalTime.parse("17:00"), 18, true);
 
-        
 //        clase.cargarClase(clase1);
 //        clase.cargarClase(clase2);
 //        clase.cargarClase(clase3);
@@ -175,12 +174,18 @@ public class GimnasioGrupo10 {
 //                System.out.println(clases.toString());
 //            }
 //        }
-
 //        Clase clasehorario = clase.buscarClaseHorario(LocalTime.parse("08:00"));
 //        if (clasehorario != null) {
 //            System.out.println(clasehorario.toString());
 //        }
-    }
-        
+//public Asistencia(Socio socio, Clase clase, LocalDate fecha_asistencia) 
+//Clase clase2 = new Clase("Entrenamiento de Baloncesto de Tiro", entrenador2, LocalTime.parse("09:00"), 20, true);
+//        Socio socio2 = new Socio(8, "41000222", "Pedro", "Gomez", 30, "pedro.gomez@example.com", "555444", true);
+//        Asistencia asistencia1 = new Asistencia(socio2,clase2,LocalDate.of(2024, 10, 6));
+//        asist.guardarAsistencia(asistencia1);
+//Socio socio3 = new Socio(9, "41000333", "Maria", "Lopez", 22, "maria.lopez@example.com", "666777", false);
+//        Asistencia asistencia2 = new Asistencia(socio3, clase2, LocalDate.of(2024, 10, 6));
+//        asist.guardarAsistencia(asistencia2);
     }
 
+}

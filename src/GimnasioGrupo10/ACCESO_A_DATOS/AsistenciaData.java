@@ -20,27 +20,76 @@ public class AsistenciaData {
         con = Conexion.getConexion();
     }
 
-    public void guardarAsistencia(Asistencia asistencia) {
-        String sql = "INSERT INTO asistencia (id_socio,id_clase,fecha_asistencia)"
-                + " VALUES (?,?,?)";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, asistencia.getSocio().getId_socio());
-            ps.setInt(2, asistencia.getClase().getId_clase());
-            ps.setDate(3, Date.valueOf(asistencia.getFecha_asistencia()));
+      public void guardarAsistencia(Asistencia asistencia) {
+        String sqlInsertAsistencia = "INSERT INTO asistencia (id_socio, id_clase, fecha_asistencia) VALUES (?, ?, ?)";
+        String sqlCheckCapacidad = "SELECT capacidad_clase, (SELECT COUNT(*) FROM asistencia WHERE id_clase=?) AS asistencias_actuales FROM clase WHERE id_clase = ?";
+        String sqlCheckMembresia = "SELECT * FROM membresia WHERE id_socio = ? AND ? BETWEEN fecha_inicio AND fecha_fin AND estado_membresia = true";
+        String sqlUpdatePases = "UPDATE membresia SET cantidad_pases = cantidad_pases - 1 WHERE id_membresia = ?";
 
-            ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            if(rs.next()){
-                asistencia.setId_asistencia(rs.getInt(1));
+        try {
+            PreparedStatement psCapacidad = con.prepareStatement(sqlCheckCapacidad);
+            PreparedStatement psMembresia = con.prepareStatement(sqlCheckMembresia);
+
+            psCapacidad.setInt(1, asistencia.getClase().getId_clase());
+            psCapacidad.setInt(2, asistencia.getClase().getId_clase());
+
+            ResultSet rsCapacidad = psCapacidad.executeQuery();
+
+            if (rsCapacidad.next()) {
+                int capacidadMaxima = rsCapacidad.getInt("capacidad_clase");
+                int asistenciasActuales = rsCapacidad.getInt("asistencias_actuales");
+
+                if (asistenciasActuales >= capacidadMaxima) {
+                    JOptionPane.showMessageDialog(null, "La clase no tiene capacidad disponible.");
+                    return;
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Clase no encontrada.");
+                return;
             }
-            ps.close();
+
+            // Verificar membresía activa y pases disponibles
+            psMembresia.setInt(1, asistencia.getSocio().getId_socio());
+            psMembresia.setDate(2, Date.valueOf(asistencia.getFecha_asistencia()));
+
+            ResultSet rsMembresia = psMembresia.executeQuery();
+            if (rsMembresia.next()) {
+                int cantidadPases = rsMembresia.getInt("cantidad_pases");
+                int idMembresia = rsMembresia.getInt("id_membresia");
+
+                if (cantidadPases <= 0) {
+                    JOptionPane.showMessageDialog(null, "El socio no tiene pases disponibles.");
+                    return;
+                }
+
+                // Registrar la asistencia
+                PreparedStatement psInsert = con.prepareStatement(sqlInsertAsistencia, Statement.RETURN_GENERATED_KEYS);
+                psInsert.setInt(1, asistencia.getSocio().getId_socio());
+                psInsert.setInt(2, asistencia.getClase().getId_clase());
+                psInsert.setDate(3, Date.valueOf(asistencia.getFecha_asistencia()));
+                psInsert.executeUpdate();
+
+                ResultSet rsInsert = psInsert.getGeneratedKeys();
+                if (rsInsert.next()) {
+                    asistencia.setId_asistencia(rsInsert.getInt(1));
+                    JOptionPane.showMessageDialog(null, "asistencia agregada con exito");
+
+                }
+
+                // Actualizar los pases disponibles
+                PreparedStatement psUpdatePases = con.prepareStatement(sqlUpdatePases);
+                psUpdatePases.setInt(1, idMembresia);
+                psUpdatePases.executeUpdate();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "El socio no tiene una membresía activa en la fecha de la clase.");
+            }
 
         } catch (SQLException ex) {
-//            Logger.getLogger(AsistenciaData.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "error al acceder a la tabla Asistencia");
-
+//            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Asistencia.");
         }
+
     }
     
     
