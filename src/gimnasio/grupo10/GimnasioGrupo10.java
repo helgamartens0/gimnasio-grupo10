@@ -37,8 +37,8 @@ public class GimnasioGrupo10 {
         Socio socio3 = new Socio(9,"41000333", "Maria", "Lopez", 22, "maria.lopez@example.com", "666777", false);
         Socio socio4 = new Socio(10,"41000444", "Juan", "Perez", 28, "juan.perez@example.com", "888999", true);
         Socio socio5 = new Socio(11,"41000555", "Ana", "Martinez", 35, "ana.martinez@example.com", "333222", false);
-        Socio socio6 = new Socio(12,"41000666", "Juan", "Romero", 25, "juan.romero@example.com", "345222", true);
-        Socio socio7 = new Socio(13,"41000113", "María", "Gómez", 35, "maria@example.com", "777888", true);
+        Socio socio6 = new Socio(18,"41000666", "Juan", "Romero", 25, "juan.romero@example.com", "345222", true);
+        Socio socio7 = new Socio(19,"41000113", "María", "Gómez", 35, "maria@example.com", "777888", true);
 
         //  public Socio(String dni_socio, String nombre_socio, String apellido_socio, int edad_socio, String correo_socio, String telefono_socio, boolean estado_socio) {
 //        soc.cargarSocio(socio1);

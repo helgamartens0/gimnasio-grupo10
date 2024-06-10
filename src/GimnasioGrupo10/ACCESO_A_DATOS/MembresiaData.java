@@ -5,8 +5,9 @@
  */
 package GimnasioGrupo10.ACCESO_A_DATOS;
 
+import GimnasioGrupo10.ENTIDADES.Socio;
 import GimnasioGrupo10.ENTIDADES.Membresia;
-import GimnasioGrupo10.ENTIDADES.*;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class MembresiaData {
     }
 
     public void cargarMembresia(Membresia membresia) {
-        String sql = "INSERT INTO membresia ( id_socio, cantidad_pases, fecha_inicio, fecha_fin, costo_membresia, estado_membresia) "
+        String sql = "INSERT INTO membresia (id_socio, cantidad_pases, fecha_inicio, fecha_fin, costo_membresia, estado_membresia) "
                 + " VALUES (?,?,?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -43,8 +44,8 @@ public class MembresiaData {
 
             if (rs.next()) {
                 membresia.setId_membresia(rs.getInt(1));
+
             }
-            ps.close();
             JOptionPane.showMessageDialog(null, "Membresia agregada con exito!!!");
 
         } catch (SQLException ex) {
@@ -104,6 +105,7 @@ public class MembresiaData {
         }
     }
 //
+
     public void cancelarMembresia(int idMembresia) {
         String sql = "UPDATE membresia SET estado_membresia = FALSE WHERE id_membresia = ?";
 
@@ -120,4 +122,3 @@ public class MembresiaData {
         }
     }
 }
-

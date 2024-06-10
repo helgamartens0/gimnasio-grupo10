@@ -115,11 +115,11 @@ public class SocioData {
     public ArrayList<Socio> buscarSocioNombre(String nombre) {
         ArrayList<Socio> socios = new ArrayList<>();
         String sql = "SELECT id_socio,dni_socio,nombre_socio,apellido_socio,edad_socio,correo_socio,telefono_socio,estado_socio FROM socio "
-                + "WHERE LOWER(nombre_socio) like LOWER(%?%)";
+                + "WHERE LOWER(nombre_socio) like LOWER(?)";
         Socio socio = null;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, nombre.toLowerCase());
+            ps.setString(1, "%"+nombre.toLowerCase()+"%");
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "Socio(s) encontrado(s) con exito!!!");
