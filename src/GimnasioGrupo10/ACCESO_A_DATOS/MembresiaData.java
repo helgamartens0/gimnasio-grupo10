@@ -17,6 +17,7 @@ import java.util.List;
 public class MembresiaData {
 
     private Connection con;
+    private SocioData socData = new SocioData();
 
     public MembresiaData() {
         con = Conexion.getConexion();
@@ -30,10 +31,12 @@ public class MembresiaData {
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, membresia.getId_membresia());
-            ps.setInt(2, membresia.getIdSocio());
+            
+            Socio socio = new Socio();
+            ps.setInt(2, socio.getId_socio());
             ps.setInt(3, membresia.getCantidad_pases());
-            ps.setDate(3, new java.sql.Date(membresia.getFecha_inicio()));
-            ps.setDate(4, new java.sql.Date(membresia.getFecha_fin()));
+            ps.setDate(3, java.sql.Date.valueOf(membresia.getFecha_inicio()));
+            ps.setDate(4, java.sql.Date.valueOf(membresia.getFecha_fin()));
             ps.setDouble(6, membresia.getCosto_membresia());
             ps.setBoolean(7, membresia.isEstado_membresia());
             ps.executeQuery();
@@ -46,21 +49,23 @@ public class MembresiaData {
     public List<Membresia> membresiaPorSocio(int idSocio) {
 
         List<Membresia> membresias = new ArrayList<>();
-        String sql = "SELECT * FROM Membresía WHERE ID_Socio = ?";
+        String sql = "SELECT * FROM Membresía WHERE id_socio = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idSocio);
             ResultSet rs = ps.executeQuery();
+            
             while (rs.next()) {
-                Membresia membresia = new Membresia(
-                        rs.getInt("ID_Membresía"),
-                        rs.getInt("ID_Socio"),
-                        rs.getInt("CantidadPases"),
-                        rs.getDate("Fecha_Inicio"),
-                        rs.getDate("Fecha_Fin"),
-                        rs.getBigDecimal("Costo"),
-                        rs.getBoolean("Estado")
-                );
+                
+                Membresia membresia = new Membresia();
+                Socio socio = socData.buscarSocioId(rs.getInt("id_socio"));
+                        membresia.setSocio(socio);
+                        membresia.setCantidad_pases(rs.getInt("cantidad_pases"));
+                        membresia.setFecha_inicio(rs.getDate("fecha_inicio").toLocalDate());
+                        membresia.setFecha_fin(rs.getDate("fecha_fin").toLocalDate());
+                        membresia.setCosto_membresia(rs.getDouble("costo_membresia"));
+                        membresia.setEstado_membresia(rs.getBoolean("estado_membresia"));
+                
                 membresias.add(membresia);
             }
         } catch (SQLException e) {
