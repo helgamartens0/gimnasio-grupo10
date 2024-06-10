@@ -47,6 +47,7 @@ public class MembresiaData {
 
             }
             JOptionPane.showMessageDialog(null, "Membresia agregada con exito!!!");
+            ps.close();
 
         } catch (SQLException ex) {
 //            Logger.getLogger(MembresiaData.class.getName()).log(Level.SEVERE, null, ex);
