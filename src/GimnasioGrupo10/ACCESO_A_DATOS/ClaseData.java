@@ -20,12 +20,14 @@ import javax.swing.JOptionPane;
 
 public class ClaseData {
 
+    
     private Connection con = null;
     private EntrenadorData entrData = new EntrenadorData();
 
     public ClaseData() {
         con = Conexion.getConexion();
     }
+
 //    public boolean existeEntrenador(int idEntrenador) {
 //        String sql = "SELECT COUNT(*) FROM entrenador WHERE id_entrenador = ?";
 //        try {
@@ -41,7 +43,6 @@ public class ClaseData {
 //        }
 //        return false;
 //    }
-
     public void cargarClase(Clase clase) {
 //        int idEntrenador = clase.getEntrenador().getId_entrenador();
 //        if (!existeEntrenador(idEntrenador)) {
@@ -75,7 +76,7 @@ public class ClaseData {
 
     public ArrayList<Clase> listarClasesActivas() {
         ArrayList<Clase> clases = new ArrayList<>();
-        String sql = "SELECT  id_clase, nombre_clase, id_entrenador, horario_clase, capacidad_clase, estado_clase "
+        String sql = "SELECT id_clase, nombre_clase, id_entrenador, horario_clase, capacidad_clase, estado_clase "
                 + " FROM clase WHERE estado_clase = 1";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -100,69 +101,28 @@ public class ClaseData {
         return clases;
     }
 
-    public Clase buscarClaseNombre(String nombre) {
+    public ArrayList<Clase> buscarClaseNombre(String nombre) {
+        ArrayList<Clase> clases = new ArrayList<>();
+
         Clase clase = null;
-        String sql = "SELECT  nombre_clase, id_entrenador, horario_clase, capacidad_clase, estado_clase "
+        String sql = "SELECT id_clase, nombre_clase, id_entrenador, horario_clase, capacidad_clase, estado_clase "
                 + " FROM clase "
                 + "WHERE nombre_clase LIKE LOWER(?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, "%"+nombre.toLowerCase()+"%");
+            ps.setString(1, "%" + nombre.toLowerCase() + "%");
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 clase = new Clase();
-                clase.setNombre_clase(nombre);
+                clase.setId_clase(rs.getInt("id_clase"));
+                clase.setNombre_clase(rs.getString("nombre_clase"));
                 Entrenador entrenador = entrData.buscarEntrenadorPorId(rs.getInt("id_entrenador"));
                 clase.setEntrenador(entrenador);
                 clase.setHora_clase((rs.getTime("horario_clase")).toLocalTime());
                 clase.setCapacidad_clase(rs.getInt("capacidad_clase"));
                 clase.setEstado_clase(true);
-                JOptionPane.showMessageDialog(null, "Clase encontrada con exito!!!");
 
-            } else {
-                JOptionPane.showMessageDialog(null, "No existe clase con ese nombre");
-            }
-        } catch (SQLException ex) {
-//            Logger.getLogger(ClaseData.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("error al acceder a la tabla de Clases");
-        }
-        return clase;
-    }
-
-    public List<Clase> buscarClasesEntrenador(String nombreEntrenador, String apellidoEntrenador) {
-        ArrayList<Clase> clases = new ArrayList<>();
-        Clase clase = null;
-        String sql = "SELECT clase.id_clase, clase.nombre_clase, clase.hora_clase, clase.capacidad_clase, clase.estado_clase, "
-                + "entrenador.nombre_entrenador, entrenador.apellido_entrenador "
-                + "FROM clase "
-                + "JOIN entrenador ON clase.id_entrenador = entrenador.id_entrenador "
-                + "WHERE entrenador.nombre_entrenador LIKE LOWER(?) AND entrenador.apellido_entrenador LIKE LOWER(?)";
-
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, "%"+nombreEntrenador+"%");
-            ps.setString(2, "%"+apellidoEntrenador+"%");
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                do {
-                    clase = new Clase();
-                    clase.setId_clase(rs.getInt("id_clase"));
-                    clase.setNombre_clase(rs.getString("nombre_clase"));
-
-                    Entrenador entrenador = new Entrenador();
-                    entrenador.setNombre_entrenador(rs.getString("nombre_entrenador"));
-                    entrenador.setApellido_entrenador(rs.getString("apellido_entrenador"));
-                    clase.setEntrenador(entrenador);
-
-                    clase.setHora_clase((rs.getTime("horario_clase")).toLocalTime());
-                    clase.setCapacidad_clase(rs.getInt("capacidad_clase"));
-                    clase.setEstado_clase(rs.getBoolean("estado_clase"));
-
-                    JOptionPane.showMessageDialog(null, "Clase encontrada con exito!!!");
-                } while (rs.next());
-
-            } else {
-                JOptionPane.showMessageDialog(null, "No existe clase con ese nombre");
+                clases.add(clase);
             }
         } catch (SQLException ex) {
 //            Logger.getLogger(ClaseData.class.getName()).log(Level.SEVERE, null, ex);
@@ -171,6 +131,44 @@ public class ClaseData {
         return clases;
     }
 
+    public ArrayList<Clase> buscarClasesEntrenador(String nombreEntrenador, String apellidoEntrenador) {
+        ArrayList<Clase> clases = new ArrayList<>();
+        Clase clase = null;
+        String sql = "SELECT clase.id_clase, clase.nombre_clase, clase.horario_clase, clase.capacidad_clase, clase.estado_clase, "
+                + "entrenador.nombre_entrenador, entrenador.apellido_entrenador "
+                + "FROM clase "
+                + "JOIN entrenador ON clase.id_entrenador = entrenador.id_entrenador "
+                + "WHERE entrenador.nombre_entrenador LIKE LOWER(?) AND entrenador.apellido_entrenador LIKE LOWER(?)";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, "%" + nombreEntrenador + "%");
+            ps.setString(2, "%" + apellidoEntrenador + "%");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                clase = new Clase();
+                clase.setId_clase(rs.getInt("id_clase"));
+                clase.setNombre_clase(rs.getString("nombre_clase"));
+
+                Entrenador entrenador = new Entrenador();
+                entrenador.setNombre_entrenador(rs.getString("nombre_entrenador"));
+                entrenador.setApellido_entrenador(rs.getString("apellido_entrenador"));
+                clase.setEntrenador(entrenador);
+
+                clase.setHora_clase((rs.getTime("horario_clase")).toLocalTime());
+                clase.setCapacidad_clase(rs.getInt("capacidad_clase"));
+                clase.setEstado_clase(rs.getBoolean("estado_clase"));
+
+                clases.add(clase);
+            }
+
+        } catch (SQLException ex) {
+//            Logger.getLogger(ClaseData.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("error al acceder a la tabla de Clases");
+        }
+        return clases;
+    }
 
     public Clase buscarClaseHorario(LocalTime horario) {
         Clase clase = null;
@@ -184,6 +182,7 @@ public class ClaseData {
             while (rs.next()) {
 
                 clase = new Clase();
+                clase.setId_clase(rs.getInt("id_clase"));
                 clase.setNombre_clase(rs.getString("nombre_clase"));
                 Entrenador entrenador = entrData.buscarEntrenadorPorId(rs.getInt("id_entrenador"));
                 clase.setEntrenador(entrenador);

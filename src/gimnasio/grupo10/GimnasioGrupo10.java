@@ -142,25 +142,44 @@ public class GimnasioGrupo10 {
         Clase clase9 = new Clase("Entrenamiento de Baloncesto de Defensa", entrenador2, LocalTime.parse("16:00"), 20, true);
         Clase clase10 = new Clase("Entrenamiento de Fútbol de Remates", entrenador1, LocalTime.parse("17:00"), 18, true);
 
-        clase.cargarClase(clase1);
-        clase.cargarClase(clase2);
-        clase.cargarClase(clase3);
-        clase.cargarClase(clase4);
-        clase.cargarClase(clase5);
-        clase.cargarClase(clase6);
-        clase.cargarClase(clase7);
-        clase.cargarClase(clase8);
-        clase.cargarClase(clase9);
-        clase.cargarClase(clase10);
+        
+//        clase.cargarClase(clase1);
+//        clase.cargarClase(clase2);
+//        clase.cargarClase(clase3);
+//        clase.cargarClase(clase4);
+//        clase.cargarClase(clase5);
+//        clase.cargarClase(clase6);
+//        clase.cargarClase(clase7);
+//        clase.cargarClase(clase8);
+//        clase.cargarClase(clase9);
+//        clase.cargarClase(clase10);
+//        ArrayList<Clase> clasesActivas = new ArrayList<>();
+//        clasesActivas = clase.listarClasesActivas();
+//
+//        if (!clasesActivas.isEmpty()) {
+//            for(Clase clases : clasesActivas){
+//                System.out.println(clases.toString());
+//            }
+//        }
+//        ArrayList<Clase> clasesNombre = new ArrayList<>();
+//        clasesNombre = clase.buscarClaseNombre("tenis");
+//        if(!clasesNombre.isEmpty()){
+//            for(Clase clases : clasesNombre){
+//                System.out.println(clases.toString());
+//            }
+//        }
+//        ArrayList<Clase> clasesEntrenador = new ArrayList<>();
+//        clasesEntrenador = clase.buscarClasesEntrenador("juan", "gonzalez");
+//        if(!clasesEntrenador.isEmpty()){
+//            for(Clase clases : clasesEntrenador){
+//                System.out.println(clases.toString());
+//            }
+//        }
 
-        ArrayList<Clase> clasesActivas = new ArrayList<>();
-        clasesActivas = clase.listarClasesActivas();
-
-        if (!clasesActivas.isEmpty()) {
-            for(Clase clases : clasesActivas){
-                System.out.println(clases.toString());
-            }
-        }
+//        Clase clasehorario = clase.buscarClaseHorario(LocalTime.parse("08:00"));
+//        if (clasehorario != null) {
+//            System.out.println(clasehorario.toString());
+//        }
     }
         
     }
