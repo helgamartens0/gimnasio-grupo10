@@ -5,6 +5,7 @@
  */
 package GimnasioGrupo10.ACCESO_A_DATOS;
 
+import GimnasioGrupo10.ENTIDADES.Membresia;
 import GimnasioGrupo10.ENTIDADES.*;
 import java.sql.*;
 import java.time.LocalDate;
@@ -79,7 +80,7 @@ public class MembresiaData {
                 membresias.add(membresia);
             }
         } catch (SQLException e) {
-            System.out.println("error " + e);
+//            System.out.println("error " + e);
             JOptionPane.showMessageDialog(null, "error al acceder a la tabla Membresia");
 
         }
@@ -97,12 +98,12 @@ public class MembresiaData {
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Membresia renovada con exito");
         } catch (Exception e) {
-            System.out.println("error " + e);
+//            System.out.println("error " + e);
             JOptionPane.showMessageDialog(null, "error al acceder a la tabla Membresia");
 
         }
     }
-
+//
     public void cancelarMembresia(int idMembresia) {
         String sql = "UPDATE membresia SET estado_membresia = FALSE WHERE id_membresia = ?";
 
@@ -113,7 +114,7 @@ public class MembresiaData {
             JOptionPane.showMessageDialog(null, "Membresia cancelada con exito");
 
         } catch (SQLException e) {
-            System.out.println("error " + e);
+//            System.out.println("error " + e);
             JOptionPane.showMessageDialog(null, "error al acceder a la tabla Membresia");
 
         }
