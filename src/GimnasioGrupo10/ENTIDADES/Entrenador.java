@@ -82,5 +82,9 @@ public class Entrenador {
         this.estado_entrenador = estado_entrenador;
     }
     
+    @Override
+    public String toString() {
+        return "Entrenador{" + "\nid=" + id_entrenador + "\ndni=" + dni_entrenador + "\nnombre=" + nombre_entrenador + "\napellido=" + apellido_entrenador + "\nespecialidad=" + especialidad_entrenador + "\nestado=" + estado_entrenador + "\n}";
+    }
 }
 

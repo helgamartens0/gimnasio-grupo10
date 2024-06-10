@@ -30,8 +30,8 @@ public class EntrenadorData {
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, entrenador.getDni_entrenador());
-            ps.setString(2, entrenador.getApellido_entrenador());
-            ps.setString(3, entrenador.getNombre_entrenador());
+            ps.setString(2, entrenador.getNombre_entrenador());
+            ps.setString(3, entrenador.getApellido_entrenador());
             ps.setString(4, entrenador.getEspecialidad_entrenador());
             ps.setBoolean(5, entrenador.isEstado_entrenador());
 
@@ -51,7 +51,7 @@ public class EntrenadorData {
     }
 
     public Entrenador buscarEntrenadorPorId(int id_entrenador) {
-        String sql = "SELECT dni_entrenador,nombre_entrenador, apellido_entrenador, especialidad_entrenador, estado_entrenador "
+        String sql = "SELECT id_entrenador,dni_entrenador,nombre_entrenador, apellido_entrenador, especialidad_entrenador, estado_entrenador "
                 + " FROM entrenador WHERE id_entrenador = ?";
         Entrenador entren = null;
         try {
@@ -60,11 +60,13 @@ public class EntrenadorData {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 entren = new Entrenador();
+                entren.setId_entrenador(rs.getInt("id_entrenador"));
                 entren.setDni_entrenador(rs.getString("dni_entrenador"));
                 entren.setNombre_entrenador(rs.getString("nombre_entrenador"));
                 entren.setApellido_entrenador(rs.getString("apellido_entrenador"));
                 entren.setEspecialidad_entrenador(rs.getString("especialidad_entrenador"));
                 entren.setEstado_entrenador(rs.getBoolean("estado_entrenador"));
+                
                 JOptionPane.showMessageDialog(null, "Entrenador encontrado con exito!!!");
             }
             else{
@@ -77,7 +79,7 @@ public class EntrenadorData {
         return entren;
     }
 
-    public List<Entrenador> listarEntrenadoresActivos() {
+    public ArrayList<Entrenador> listarEntrenadoresActivos() {
         ArrayList<Entrenador> entrenadores = new ArrayList<>();
 
         String sql = "SELECT id_entrenador, dni_entrenador, nombre_entrenador, apellido_entrenador, especialidad_entrenador, estado_entrenador"
@@ -109,10 +111,10 @@ public class EntrenadorData {
         Entrenador entrenador = null;
         String sql = "SELECT id_entrenador, dni_entrenador, nombre_entrenador, apellido_entrenador, especialidad_entrenador, estado_entrenador "
                 + " FROM entrenador"
-                + " WHERE nombre_entrenador like LOWER(%?%)";
+                + " WHERE nombre_entrenador like LOWER(?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, nombre.toLowerCase());
+            ps.setString(1, "%"+nombre.toLowerCase()+"%");
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "Entrenador(es) encontrado(s) con exito!!!");
@@ -129,7 +131,7 @@ public class EntrenadorData {
                     entrenadores.add(entrenador);
                 } while (rs.next());
             } else {
-                JOptionPane.showMessageDialog(null, "No existe ningun entrenador con ese nombre");
+                JOptionPane.showMessageDialog(null, "No existe ningun socio con ese nombre");
             }
         } catch (SQLException ex) {
 //            Logger.getLogger(EntrenadorData.class.getName()).log(Level.SEVERE, null, ex);
@@ -143,11 +145,11 @@ public class EntrenadorData {
         Entrenador entrenador = null;
         String sql = "SELECT id_entrenador, dni_entrenador, nombre_entrenador, apellido_entrenador, especialidad_entrenador, estado_entrenador "
                 + " FROM entrenador"
-                + " WHERE nombre_entrenador like LOWER(%?%) AND  apellido_entrenador like LOWER(%?%)";
+                + " WHERE nombre_entrenador like LOWER(?) AND  apellido_entrenador like LOWER(?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, nombre.toLowerCase());
-            ps.setString(2, apellido.toLowerCase());
+            ps.setString(1, "%"+nombre.toLowerCase()+"%");
+            ps.setString(2, "%"+apellido.toLowerCase()+"%");
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "Entrenador(es) encontrado(s) con exito!!!");
@@ -163,7 +165,7 @@ public class EntrenadorData {
                     entrenadores.add(entrenador);
                 } while (rs.next());
             } else {
-                JOptionPane.showMessageDialog(null, "No existe ningun entrenador con ese nombre");
+                JOptionPane.showMessageDialog(null, "No existe ningun socio con ese nombre");
             }
         } catch (SQLException ex) {
 //            Logger.getLogger(EntrenadorData.class.getName()).log(Level.SEVERE, null, ex);
@@ -176,11 +178,11 @@ public class EntrenadorData {
         ArrayList<Entrenador> entrenadores = new ArrayList<>();
         Entrenador entrenador = null;
         String sql = "SELECT id_entrenador, dni_entrenador, nombre_entrenador, apellido_entrenador, especialidad_entrenador, estado_entrenador "
-                + " FROM entrenador"
-                + " WHERE  apellido_entrenador like LOWER(%?%)";
+                + " FROM entrenador "
+                + " WHERE  apellido_entrenador like LOWER(?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, apellido.toLowerCase());
+            ps.setString(1, "%"+apellido.toLowerCase()+"%");
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "Entrenador(es) encontrado(s) con exito!!!");
