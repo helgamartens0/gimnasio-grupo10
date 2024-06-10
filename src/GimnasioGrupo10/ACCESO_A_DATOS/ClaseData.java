@@ -75,13 +75,14 @@ public class ClaseData {
 
     public ArrayList<Clase> listarClasesActivas() {
         ArrayList<Clase> clases = new ArrayList<>();
-        String sql = "SELECT  nombre_clase, id_entrenador, horario_clase, capacidad_clase, estado_clase "
+        String sql = "SELECT  id_clase, nombre_clase, id_entrenador, horario_clase, capacidad_clase, estado_clase "
                 + " FROM clase WHERE estado_clase = 1";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Clase clase = new Clase();
+                clase.setId_clase(rs.getInt("id_clase"));
                 clase.setNombre_clase(rs.getString("nombre_clase"));
                 Entrenador entrenador = entrData.buscarEntrenadorPorId(rs.getInt("id_entrenador"));
                 clase.setEntrenador(entrenador);
