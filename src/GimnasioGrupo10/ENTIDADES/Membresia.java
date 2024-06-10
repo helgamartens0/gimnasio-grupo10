@@ -93,7 +93,12 @@ public class Membresia {
     public void setEstado_membresia(boolean estado_membresia) {
         this.estado_membresia = estado_membresia;
     }
-    
-    
 
+    @Override
+    public String toString() {
+        return "Membresia{" + "id_membresia=" + id_membresia + ", socio=" + socio.getId_socio() 
+                + ", cantidad_pases=" + cantidad_pases + ", fecha_inicio=" + fecha_inicio 
+                + ", fecha_fin=" + fecha_fin + ", costo_membresia=" + costo_membresia 
+                + ", estado_membresia=" + estado_membresia + '}';
+    }
 }

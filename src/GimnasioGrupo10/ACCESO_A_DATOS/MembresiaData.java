@@ -7,8 +7,10 @@ package GimnasioGrupo10.ACCESO_A_DATOS;
 
 import GimnasioGrupo10.ENTIDADES.*;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,87 +18,102 @@ import java.util.List;
  */
 public class MembresiaData {
 
-    private Connection con;
+    private java.sql.Connection con;
     private SocioData socData = new SocioData();
 
     public MembresiaData() {
         con = Conexion.getConexion();
     }
 
-    public void agregarMembresia(Membresia membresia) {
-        String sql = "INSERT INTO membresia (id_membresia, id_socio, cantidad_pases,"
-                + " fecha_inicio, fecha_fin, costo_membresia, estado_membresia)"
-                + " VALUES (?,?,?,?,?,?,?)";
-
+    public void cargarMembresia(Membresia membresia) {
+        String sql = "INSERT INTO membresia ( id_socio, cantidad_pases, fecha_inicio, fecha_fin, costo_membresia, estado_membresia) "
+                + " VALUES (?,?,?,?,?,?)";
         try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, membresia.getId_membresia());
-            
-            Socio socio = new Socio();
-            ps.setInt(2, socio.getId_socio());
-            ps.setInt(3, membresia.getCantidad_pases());
-            ps.setDate(3, java.sql.Date.valueOf(membresia.getFecha_inicio()));
-            ps.setDate(4, java.sql.Date.valueOf(membresia.getFecha_fin()));
-            ps.setDouble(6, membresia.getCosto_membresia());
-            ps.setBoolean(7, membresia.isEstado_membresia());
-            ps.executeQuery();
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, membresia.getSocio().getId_socio());
+            ps.setInt(2, membresia.getCantidad_pases());
+            ps.setDate(3, Date.valueOf(membresia.getFecha_inicio()));
+            ps.setDate(4, Date.valueOf(membresia.getFecha_fin()));
+            ps.setDouble(5, membresia.getCosto_membresia());
+            ps.setBoolean(6, membresia.isEstado_membresia());
 
-        } catch (Exception e) {
-            System.out.println("error " + e);
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+
+            if (rs.next()) {
+                membresia.setId_membresia(rs.getInt(1));
+            }
+            ps.close();
+            JOptionPane.showMessageDialog(null, "Membresia agregada con exito!!!");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Membresia. " + ex);
         }
     }
 
     public List<Membresia> membresiaPorSocio(int idSocio) {
 
         List<Membresia> membresias = new ArrayList<>();
-        String sql = "SELECT * FROM Membresía WHERE id_socio = ?";
+        String sql = "SELECT * "
+                + "FROM membresia "
+                + "JOIN socio ON membresia.id_socio = socio.id_socio "
+                + "WHERE socio.id_socio = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idSocio);
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
-                
+
                 Membresia membresia = new Membresia();
+                membresia.setId_membresia(rs.getInt("id_membresia"));
                 Socio socio = socData.buscarSocioId(rs.getInt("id_socio"));
-                        membresia.setSocio(socio);
-                        membresia.setCantidad_pases(rs.getInt("cantidad_pases"));
-                        membresia.setFecha_inicio(rs.getDate("fecha_inicio").toLocalDate());
-                        membresia.setFecha_fin(rs.getDate("fecha_fin").toLocalDate());
-                        membresia.setCosto_membresia(rs.getDouble("costo_membresia"));
-                        membresia.setEstado_membresia(rs.getBoolean("estado_membresia"));
-                
+                membresia.setSocio(socio);
+                membresia.setCantidad_pases(rs.getInt("cantidad_pases"));
+                membresia.setFecha_inicio(rs.getDate("fecha_inicio").toLocalDate());
+                membresia.setFecha_fin(rs.getDate("fecha_fin").toLocalDate());
+                membresia.setCosto_membresia(rs.getDouble("costo_membresia"));
+                membresia.setEstado_membresia(rs.getBoolean("estado_membresia"));
+
                 membresias.add(membresia);
             }
         } catch (SQLException e) {
-            System.out.println("error " + e);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Membresia. " + e);
+
         }
         return membresias;
     }
 
-    public void renovarMembresia(int idMembresia, Date nuevaFechaFin, int nuevaCantPases) {
-        String sql = "UPDATE membresia SET fecha_fin = ?, cantidad_pases = ? WHERE id_membresia = ?";
+    public void renovarMembresia(int idMembresia, LocalDate nuevaFechaFin, int nuevaCantPases) {
+        String sql = "UPDATE membresia SET fecha_fin = ?, cantidad_pases = ?, estado_membresia = 1 WHERE id_membresia = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setDate(1, new java.sql.Date(nuevaFechaFin.getTime()));
+            ps.setDate(1, Date.valueOf(nuevaFechaFin));
             ps.setInt(2, nuevaCantPases);
             ps.setInt(3, idMembresia);
             ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Membresia renovada con exito");
         } catch (Exception e) {
             System.out.println("error " + e);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Membresia. " + e);
+
         }
     }
-    
-    public void cancelarMembresia(int idMembresia){
+
+    public void cancelarMembresia(int idMembresia) {
         String sql = "UPDATE membresia SET estado_membresia = FALSE WHERE id_membresia = ?";
-        
+
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idMembresia);
             ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Membresia cancelada con exito");
+
         } catch (SQLException e) {
             System.out.println("error " + e);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Membresia. " + e);
+
         }
     }
 }
