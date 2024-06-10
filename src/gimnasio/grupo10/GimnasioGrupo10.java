@@ -8,6 +8,7 @@ package gimnasio.grupo10;
 import GimnasioGrupo10.ACCESO_A_DATOS.AsistenciaData;
 import GimnasioGrupo10.ACCESO_A_DATOS.ClaseData;
 import GimnasioGrupo10.ACCESO_A_DATOS.EntrenadorData;
+import GimnasioGrupo10.ACCESO_A_DATOS.MembresiaData;
 import GimnasioGrupo10.ACCESO_A_DATOS.SocioData;
 import GimnasioGrupo10.ENTIDADES.Clase;
 import GimnasioGrupo10.ENTIDADES.Entrenador;
@@ -24,10 +25,10 @@ public class GimnasioGrupo10 {
 
     public static void main(String[] args) {
   
-//        SocioData soc = new SocioData();
-//        EntrenadorData ent = new EntrenadorData();
-//        AsistenciaData asist = new AsistenciaData();
-//        MembresiaData memb = new MembresiaData();
+        SocioData soc = new SocioData();
+        EntrenadorData ent = new EntrenadorData();
+        AsistenciaData asist = new AsistenciaData();
+        MembresiaData memb = new MembresiaData();
         ClaseData clase = new ClaseData();
         /*----------------------------------------------------------------------------------------------------------------------------*/
 //        Socio socio2 = new Socio("41000222", "Pedro", "Gomez", 30, "pedro.gomez@example.com", "555444", true);
@@ -75,13 +76,13 @@ public class GimnasioGrupo10 {
         Entrenador entrenador5 = new Entrenador(12, "556677889", "Christopher", "Davis", "Tenis", true);
         Entrenador entrenador6 = new Entrenador(13, "222333222", "Juan", "González", "Tenis", true);
         Entrenador entrenador7 = new Entrenador(14, "555444333", "María", "López", "Tenis", true);
-//        ent.cargarEntrenador(entrenador1);
-//        ent.cargarEntrenador(entrenador2);
-//        ent.cargarEntrenador(entrenador3);
-//        ent.cargarEntrenador(entrenador4);
-//        ent.cargarEntrenador(entrenador5);
-//        ent.cargarEntrenador(entrenador7);
-//        ent.cargarEntrenador(entrenador6);
+        ent.cargarEntrenador(entrenador1);
+        ent.cargarEntrenador(entrenador2);
+        ent.cargarEntrenador(entrenador3);
+        ent.cargarEntrenador(entrenador4);
+        ent.cargarEntrenador(entrenador5);
+        ent.cargarEntrenador(entrenador7);
+        ent.cargarEntrenador(entrenador6);
 //        ArrayList<Entrenador> entrenadorApellido = new ArrayList<>();
 //        entrenadorApellido = ent.buscarEntrenadorApellido("John");
 //        System.out.println("cantida de entrenadores con el apellido indicado: " + entrenadorApellido.size() + "\n");
