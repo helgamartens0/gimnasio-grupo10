@@ -196,7 +196,7 @@ public class ClaseData {
         return clase;
     }
     public Clase buscarClaseId(int id){
-        String sql="SELECT nombre_clase,id_clase,entrenador_clase, hora_clase, capacidad_clase, estado_clase   FROM `clase` WHERE id_clase=? AND estado=1";
+        String sql="SELECT *  FROM `clase` WHERE id_clase=? AND estado_clase=1";
         Clase clase =null;
         
         try {
@@ -205,7 +205,7 @@ public class ClaseData {
             ResultSet rs=ps.executeQuery();
             if(rs.next()){
                 clase= new Clase();
-                clase.setId_clase(id);
+                clase.setId_clase(rs.getInt("id_clase"));
                 clase.setNombre_clase(rs.getString("nombre_clase"));
                 Entrenador entrenador = entrData.buscarEntrenadorPorId(rs.getInt("id_entrenador"));
                 clase.setEntrenador(entrenador);
