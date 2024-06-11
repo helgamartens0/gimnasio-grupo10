@@ -196,7 +196,7 @@ public class ClaseData {
         return clase;
     }
     public Clase buscarClaseId(int id){
-        String sql="SELECT nombre_clase,id_clase,entrenador_clase, hora_clase, capacidad_clase, estado_clase   FROM `materia` WHERE idMateria=? AND estado=1";
+        String sql="SELECT nombre_clase,id_clase,entrenador_clase, hora_clase, capacidad_clase, estado_clase   FROM `clase` WHERE id_clase=? AND estado=1";
         Clase clase =null;
         
         try {
