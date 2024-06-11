@@ -3,10 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GimnasioGrupo10.VISTAS;
+package helgafinal_prueba.VISTAS;
 
-import GimnasioGrupo10.ACCESO_A_DATOS.ClaseData;
-import GimnasioGrupo10.ENTIDADES.Clase;
+import helgafinal_prueba.ACCESO_A_DATOS.ClaseData;
+import helgafinal_prueba.ACCESO_A_DATOS.EntrenadorData;
+import helgafinal_prueba.ENTIDADES.Clase;
+import helgafinal_prueba.ENTIDADES.Entrenador;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,13 +21,17 @@ import javax.swing.JOptionPane;
  * @author Jesica
  */
 public class FormClase extends javax.swing.JInternalFrame {
-    private ClaseData claseData  = new ClaseData();
-    private Clase clase = null;
-    /**
-     * Creates new form FormClase
-     */
+
+    private ClaseData claseData;
+    private EntrenadorData entrenadorData=new EntrenadorData();;
+    private Clase clas = null;
+    private ArrayList<Entrenador> listaE = entrenadorData.listarEntrenadoresActivos();
+
     public FormClase() {
         initComponents();
+        cargarHorarios();
+        cargarEntrenadores();
+        claseData = new ClaseData();
     }
 
     /**
@@ -34,10 +45,8 @@ public class FormClase extends javax.swing.JInternalFrame {
 
         jlClase = new javax.swing.JLabel();
         jrbEstado = new javax.swing.JRadioButton();
-        jtDNIEntrenador = new javax.swing.JTextField();
         jlEstado = new javax.swing.JLabel();
         jtNombre = new javax.swing.JTextField();
-        jtHorario = new javax.swing.JTextField();
         jlHorario = new javax.swing.JLabel();
         jtCapacidad = new javax.swing.JTextField();
         jlCapacidad = new javax.swing.JLabel();
@@ -50,6 +59,8 @@ public class FormClase extends javax.swing.JInternalFrame {
         jbSalir = new javax.swing.JButton();
         jlCodigo = new javax.swing.JLabel();
         jtCodigo = new javax.swing.JTextField();
+        jcbHorario = new javax.swing.JComboBox<>();
+        jcbEntrenador = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setTitle("CLASES");
@@ -60,14 +71,19 @@ public class FormClase extends javax.swing.JInternalFrame {
         jlClase.setText("CLASE");
 
         jrbEstado.setText("Activo");
+        jrbEstado.setEnabled(false);
 
         jlEstado.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jlEstado.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jlEstado.setText("Estado");
 
+        jtNombre.setEnabled(false);
+
         jlHorario.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jlHorario.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jlHorario.setText("Horario");
+
+        jtCapacidad.setEnabled(false);
 
         jlCapacidad.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jlCapacidad.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -75,7 +91,7 @@ public class FormClase extends javax.swing.JInternalFrame {
 
         jlDNIEntrenador.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jlDNIEntrenador.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jlDNIEntrenador.setText("DNI Entrenador");
+        jlDNIEntrenador.setText("Entrenador");
 
         jbBuscar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jbBuscar.setText("Buscar");
@@ -91,9 +107,24 @@ public class FormClase extends javax.swing.JInternalFrame {
 
         jbNuevo.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jbNuevo.setText("Nuevo");
+        jbNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbNuevoMouseClicked(evt);
+            }
+        });
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoActionPerformed(evt);
+            }
+        });
 
         jbGuardar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jbEliminar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jbEliminar.setText("Eliminar");
@@ -110,6 +141,15 @@ public class FormClase extends javax.swing.JInternalFrame {
         jlCodigo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jlCodigo.setText("Codigo");
 
+        jcbHorario.setEnabled(false);
+        jcbHorario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbHorarioActionPerformed(evt);
+            }
+        });
+
+        jcbEntrenador.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -125,15 +165,6 @@ public class FormClase extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(178, 178, 178)
-                        .addComponent(jbEliminar)
-                        .addGap(48, 48, 48)
-                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(jbGuardar))
-                    .addComponent(jbNuevo)
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlDNIEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -141,12 +172,20 @@ public class FormClase extends javax.swing.JInternalFrame {
                             .addComponent(jlCapacidad)
                             .addComponent(jlEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jrbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtDNIEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(jcbHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbEntrenador, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jbNuevo)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbGuardar)
+                        .addGap(10, 10, 10)
+                        .addComponent(jbEliminar)
+                        .addGap(48, 48, 48)
+                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -159,18 +198,18 @@ public class FormClase extends javax.swing.JInternalFrame {
                     .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlCodigo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlNombre)
                     .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlDNIEntrenador)
-                    .addComponent(jtDNIEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlHorario))
+                    .addComponent(jlDNIEntrenador)
+                    .addComponent(jcbEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jlHorario)
+                    .addComponent(jcbHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -201,20 +240,88 @@ public class FormClase extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             Integer id = Integer.parseInt(jtCodigo.getText());
-            clase = claseData.buscarClaseId(id);
-        
-            
-            if(clase!=null){
-                jtNombre.setText(clase.getNombre_clase());
-              
-
-  
+            clas = claseData.buscarClaseId(id);
+            if (clas != null) {
+                jtNombre.setText(clas.getNombre_clase());
+                jcbEntrenador.setSelectedItem(clas.getEntrenador().getId_entrenador());
+                jcbHorario.setSelectedItem(clas.getHora_clase());
+                jtCapacidad.setText(String.valueOf(clas.getCapacidad_clase()));
+                jrbEstado.setSelected(clas.isEstado_clase());
             }
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+      
+    }//GEN-LAST:event_jbNuevoActionPerformed
+
+    private void jcbHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbHorarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbHorarioActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        // TODO add your handling code here:
+
+        //creamos variables asociadas
+        //evaluamos casilleros vacios
+
+    }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jbNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbNuevoMouseClicked
+        // TODO add your handling code here:
+       
+        jtNombre.setEnabled(true);
+        jcbEntrenador.setEnabled(true);
+        jcbHorario.setEnabled(true);
+        jtCapacidad.setEnabled(true);
+        jrbEstado.setEnabled(true);
+
+    }//GEN-LAST:event_jbNuevoMouseClicked
+
+    private void limpiarCampos() {
+        jtCodigo.setText("");
+        jtNombre.setText("");
+        jcbEntrenador.setSelectedIndex(0);
+        jcbHorario.setSelectedIndex(0);
+        jrbEstado.setSelected(false);
+    }
+
+    private void cargarHorarios() {
+        // Lista de horarios disponibles
+        List<LocalTime> horarios = new ArrayList<>();
+        // Agregar horarios desde las 8:00 hasta las 20:00, con intervalos de una hora
+        LocalTime hora = LocalTime.of(8, 0);
+        while (hora.isBefore(LocalTime.of(20, 0))) {
+            horarios.add(hora);
+            hora = hora.plusHours(1);
+        }
+        for (LocalTime horario : horarios) {
+            jcbHorario.addItem(horario);
+        }
+    }
+
+    private void cargarEntrenadores() {
+        for (Entrenador entr : listaE) {
+            String datos = entr.jcbEntrenadores();
+            jcbEntrenador.addItem(datos);
+        }
+    }
+
+    private LocalTime pasarAHs(String hs) {
+        //String hs es el que representa el horario en formato HH:mm
+
+        // Crear un objeto DateTimeFormatter para parsear el String
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        // Parsear el String a LocalTime
+        LocalTime horaLocalTime = LocalTime.parse(hs, formatter);
+
+        return horaLocalTime;
+
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -223,6 +330,8 @@ public class FormClase extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;
+    private javax.swing.JComboBox<String> jcbEntrenador;
+    private javax.swing.JComboBox<LocalTime> jcbHorario;
     private javax.swing.JLabel jlCapacidad;
     private javax.swing.JLabel jlClase;
     private javax.swing.JLabel jlCodigo;
@@ -233,8 +342,6 @@ public class FormClase extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jrbEstado;
     private javax.swing.JTextField jtCapacidad;
     private javax.swing.JTextField jtCodigo;
-    private javax.swing.JTextField jtDNIEntrenador;
-    private javax.swing.JTextField jtHorario;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
 }
