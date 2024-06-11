@@ -45,6 +45,7 @@ public class FormClase extends javax.swing.JInternalFrame {
         jbSalir = new javax.swing.JButton();
 
         setClosable(true);
+        setTitle("CLASES");
         setPreferredSize(new java.awt.Dimension(480, 471));
 
         jlClase.setFont(new java.awt.Font("Dubai Medium", 3, 18)); // NOI18N
@@ -119,7 +120,7 @@ public class FormClase extends javax.swing.JInternalFrame {
                                 .addGap(31, 31, 31)
                                 .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
+                        .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(178, 178, 178)
@@ -130,7 +131,7 @@ public class FormClase extends javax.swing.JInternalFrame {
                                 .addGap(71, 71, 71)
                                 .addComponent(jbGuardar))
                             .addComponent(jbNuevo))))
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,17 +155,17 @@ public class FormClase extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlCapacidad))
-                .addGap(18, 18, 18)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlEstado)
                     .addComponent(jrbEstado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbNuevo)
                     .addComponent(jbGuardar)
                     .addComponent(jbEliminar)
                     .addComponent(jbSalir))
-                .addGap(20, 20, 20))
+                .addGap(34, 34, 34))
         );
 
         pack();

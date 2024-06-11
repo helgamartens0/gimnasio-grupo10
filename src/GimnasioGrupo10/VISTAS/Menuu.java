@@ -5,6 +5,8 @@
  */
 package GimnasioGrupo10.VISTAS;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Jesica
@@ -40,7 +42,9 @@ public class Menuu extends javax.swing.JFrame {
         jmSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(480, 471));
+        setTitle("MENU");
+        setFocusable(false);
+        setResizable(false);
 
         escritorio.setPreferredSize(new java.awt.Dimension(480, 471));
 
@@ -48,11 +52,11 @@ public class Menuu extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 655, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 436, Short.MAX_VALUE)
+            .addGap(0, 588, Short.MAX_VALUE)
         );
 
         jmSocio.setText("SOCIO");
@@ -113,6 +117,11 @@ public class Menuu extends javax.swing.JFrame {
         jMenuBar1.add(jmConsultas);
 
         jmSalir.setText("SALIR");
+        jmSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmSalirMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jmSalir);
 
         setJMenuBar(jMenuBar1);
@@ -121,14 +130,15 @@ public class Menuu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE)
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmiFormSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiFormSocioActionPerformed
@@ -181,6 +191,15 @@ public class Menuu extends javax.swing.JFrame {
         fLClase.setVisible(true);
         escritorio.add(fLClase);
     }//GEN-LAST:event_jmiListClaseActionPerformed
+
+    private void jmSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmSalirMouseClicked
+        // TODO add your handling code here:
+        
+        int confirm = JOptionPane.showConfirmDialog(null, "Desea salir del menu ?","MENU", JOptionPane.YES_NO_OPTION);
+        
+        if(confirm==0){
+            dispose();}
+    }//GEN-LAST:event_jmSalirMouseClicked
 
     /**
      * @param args the command line arguments
