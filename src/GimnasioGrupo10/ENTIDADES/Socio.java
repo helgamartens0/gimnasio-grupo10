@@ -7,7 +7,7 @@ package GimnasioGrupo10.ENTIDADES;
 
 public class Socio {
     private int id_socio;
-    private String dni_socio;
+    private int dni_socio;
     private String nombre_socio;
     private String apellido_socio;
     private int edad_socio;
@@ -18,7 +18,7 @@ public class Socio {
     public Socio() {
     }
 
-    public Socio(String dni_socio, String nombre_socio, String apellido_socio, int edad_socio, String correo_socio, String telefono_socio, boolean estado_socio) {
+    public Socio(int dni_socio, String nombre_socio, String apellido_socio, int edad_socio, String correo_socio, String telefono_socio, boolean estado_socio) {
         this.dni_socio = dni_socio;
         this.nombre_socio = nombre_socio;
         this.apellido_socio = apellido_socio;
@@ -28,7 +28,7 @@ public class Socio {
         this.estado_socio = estado_socio;
     }
 
-    public Socio(int id_socio, String dni_socio, String nombre_socio, String apellido_socio, int edad_socio, String correo_socio, String telefono_socio, boolean estado_socio) {
+    public Socio(int id_socio, int dni_socio, String nombre_socio, String apellido_socio, int edad_socio, String correo_socio, String telefono_socio, boolean estado_socio) {
         this.id_socio = id_socio;
         this.dni_socio = dni_socio;
         this.nombre_socio = nombre_socio;
@@ -47,11 +47,11 @@ public class Socio {
         this.id_socio = id_socio;
     }
 
-    public String getDni_socio() {
+    public int getDni_socio() {
         return dni_socio;
     }
 
-    public void setDni_socio(String dni_socio) {
+    public void setDni_socio(int dni_socio) {
         this.dni_socio = dni_socio;
     }
 

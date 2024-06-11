@@ -5,11 +5,19 @@
  */
 package GimnasioGrupo10.VISTAS;
 
+import GimnasioGrupo10.ACCESO_A_DATOS.SocioData;
+import GimnasioGrupo10.ENTIDADES.Socio;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Jesica
  */
 public class FormSocio extends javax.swing.JInternalFrame {
+     private SocioData socioData  = new SocioData();
+    private Socio socio = null;
 
     /**
      * Creates new form FormSoco
@@ -54,6 +62,11 @@ public class FormSocio extends javax.swing.JInternalFrame {
 
         jbGuardar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jlEstado.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jlEstado.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -61,6 +74,11 @@ public class FormSocio extends javax.swing.JInternalFrame {
 
         jbEliminar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
         jbSalir.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jbSalir.setText("Salir");
@@ -90,6 +108,11 @@ public class FormSocio extends javax.swing.JInternalFrame {
 
         jbBuscar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
 
         jlSocio.setFont(new java.awt.Font("Dubai Medium", 3, 18)); // NOI18N
         jlSocio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -103,6 +126,11 @@ public class FormSocio extends javax.swing.JInternalFrame {
 
         jbNuevo.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jbNuevo.setText("Nuevo");
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoActionPerformed(evt);
+            }
+        });
 
         jlTelefono.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jlTelefono.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -222,6 +250,89 @@ public class FormSocio extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtDNIActionPerformed
 
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        // TODO add your handling code here:
+        try{
+            Integer dni = Integer.parseInt(jtDNI.getText());
+            socio = socioData.buscarSocioDni(dni);
+
+            if (socio != null) {
+                jtDNI.setText(String.valueOf(socio.getDni_socio()));
+                jtApellido.setText(String.valueOf(socio.getApellido_socio()));
+                jtNombre.setText(String.valueOf(socio.getNombre_socio()));
+                jtEdad.setText(String.valueOf(socio.getEdad_socio()));
+                jtCorreo.setText(String.valueOf(socio.getCorreo_socio()));
+                jtTelefono.setText(String.valueOf(socio.getTelefono_socio()));
+                jrbEstado.setSelected(socio.isEstado_socio());
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+        // TODO add your handling code here:
+        limpiarCampos();
+        socio = null;
+    }//GEN-LAST:event_jbNuevoActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        // TODO add your handling code here:
+        if(socio!=null){
+            socioData.eliminarSocio(socio.getId_socio());
+            socio=null;
+            limpiarCampos();
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un socio");
+        }
+    }//GEN-LAST:event_jbEliminarActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        // TODO add your handling code here:
+        try{
+            Integer dni = Integer.parseInt(jtDNI.getText());
+            String nombre = jtNombre.getText();
+            String apellido = jtApellido.getText();
+            Integer edad = Integer.parseInt(jtEdad.getText());
+            String correo =jtCorreo.getText();
+            String telefono = jtTelefono.getText();
+
+            if(nombre.isEmpty() || apellido.isEmpty() ||  correo.isEmpty() || telefono.isEmpty()){
+                JOptionPane.showMessageDialog(null, "NO puede haber campos vacios.");
+            }
+            
+            Boolean estado = jrbEstado.isSelected();
+
+            if(socio==null){
+                socio = new Socio(dni, nombre, apellido,edad,correo,telefono, estado);
+                socioData.cargarSocio(socio);
+            } else {
+
+                socio.setDni_socio(dni);
+                socio.setApellido_socio(apellido);
+                socio.setNombre_socio(nombre);
+                socio.setEdad_socio(edad);
+                socio.setCorreo_socio(correo);
+                socio.setTelefono_socio(telefono);
+                socioData.modificarSocio(socio);
+            }
+        
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+     
+    }//GEN-LAST:event_jbGuardarActionPerformed
+    private void limpiarCampos(){
+    
+        jtDNI.setText("");
+        jtApellido.setText("");
+        jtNombre.setText("");
+        jrbEstado.setSelected(true);
+        jtTelefono.setText("");
+        jtEdad.setText("");
+        jtCorreo.setText("");
+       
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbBuscar;

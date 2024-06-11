@@ -195,4 +195,33 @@ public class ClaseData {
         }
         return clase;
     }
+    public Clase buscarClaseId(int id){
+        String sql="SELECT nombre_clase,id_clase,entrenador_clase, hora_clase, capacidad_clase, estado_clase   FROM `materia` WHERE idMateria=? AND estado=1";
+        Clase clase =null;
+        
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                clase= new Clase();
+                clase.setId_clase(id);
+                clase.setNombre_clase(rs.getString("nombre_clase"));
+                Entrenador entrenador = entrData.buscarEntrenadorPorId(rs.getInt("id_entrenador"));
+                clase.setEntrenador(entrenador);
+                clase.setHora_clase((rs.getTime("horario_clase")).toLocalTime());
+                clase.setCapacidad_clase(rs.getInt("capacidad_clase"));
+                clase.setEstado_clase(true);
+              
+                
+            }else{
+                JOptionPane.showMessageDialog(null,"No existe clase con ese id");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error al acceder a la tabla clase");
+        }
+        return clase;
+        
+    }   
 }

@@ -29,7 +29,7 @@ public class SocioData {
         try {
             /*Este método de la conexión (con) crea un objeto PreparedStatement para enviar parámetros a la base de datos.*/
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, socio.getDni_socio());
+            ps.setInt(1, socio.getDni_socio());
             ps.setString(2, socio.getNombre_socio());
             ps.setString(3, socio.getApellido_socio());
             ps.setInt(4, socio.getEdad_socio());
@@ -66,7 +66,7 @@ public class SocioData {
                 Socio socio = new Socio();
                 
                 socio.setId_socio(rs.getInt("id_socio"));
-                socio.setDni_socio(rs.getString("dni_socio"));
+                socio.setDni_socio(rs.getInt("dni_socio"));
                 socio.setNombre_socio(rs.getString("nombre_socio"));
                 socio.setApellido_socio(rs.getString("apellido_socio"));
                 socio.setEdad_socio(rs.getInt("edad_socio"));
@@ -96,7 +96,7 @@ public class SocioData {
                 Socio socio = new Socio();
                 
                 socio.setId_socio(rs.getInt("id_socio"));
-                socio.setDni_socio(rs.getString("dni_socio"));
+                socio.setDni_socio(rs.getInt("dni_socio"));
                 socio.setNombre_socio(rs.getString("nombre_socio"));
                 socio.setApellido_socio(rs.getString("apellido_socio"));
                 socio.setEdad_socio(rs.getInt("edad_socio"));
@@ -129,7 +129,7 @@ public class SocioData {
                     socio = new Socio();
                     
                     socio.setId_socio(rs.getInt("id_socio"));
-                    socio.setDni_socio(rs.getString("dni_socio"));
+                    socio.setDni_socio(rs.getInt("dni_socio"));
                     socio.setNombre_socio(rs.getString("nombre_socio"));
                     socio.setApellido_socio(rs.getString("apellido_socio"));
                     socio.setEdad_socio(rs.getInt("edad_socio"));
@@ -165,7 +165,7 @@ public class SocioData {
                 socio = new Socio();
                 
                 socio.setId_socio(id_socio);
-                socio.setDni_socio(rs.getString("dni_socio"));
+                socio.setDni_socio(rs.getInt("dni_socio"));
                 socio.setApellido_socio(rs.getString("apellido_socio"));
                 socio.setNombre_socio(rs.getString("nombre_socio"));
                 socio.setEdad_socio(rs.getInt("edad_socio"));
@@ -185,4 +185,82 @@ public class SocioData {
         }
         return socio;
     }
+    public Socio buscarSocioDni(int dni_socio) {
+        String sql = "SELECT id_socio,dni_socio,nombre_socio,apellido_socio,edad_socio,correo_socio,telefono_socio,estado_socio FROM socio "
+                + "WHERE dni_socio = ? AND estado_socio=1";
+        Socio socio = null;
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            /*en la consulta SQL, reemplaza el primer signo de interrogación (?) con el valor de id_socio*/
+            ps.setInt(1, dni_socio);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                
+                socio = new Socio();
+                socio.setId_socio(rs.getInt("id_socio"));
+                socio.setDni_socio(rs.getInt("dni_socio"));
+                socio.setApellido_socio(rs.getString("apellido_socio"));
+                socio.setNombre_socio(rs.getString("nombre_socio"));
+                socio.setEdad_socio(rs.getInt("edad_socio"));
+                socio.setCorreo_socio(rs.getString("correo_socio"));
+                socio.setTelefono_socio(rs.getString("telefono_socio"));
+                socio.setEstado_socio(true);
+                
+                JOptionPane.showMessageDialog(null, "Socio encontrado con exito!!!");
+             
+    
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe ese socio");
+            }
+        } catch (SQLException ex) {
+//            Logger.getLogger(SocioData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "error al acceder a la tabla Socio");
+            
+        }
+        return socio;
+    }
+    public void eliminarSocio(int id){
+        String sql="UPDATE `socio` SET estado_socio =0 WHERE id_socio=?";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, id);
+            int exito=ps.executeUpdate();
+            if(exito == 1){
+                JOptionPane.showMessageDialog(null,"Socio eliminado ");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error al acceder a la tabla socio");
+        }
+    }
+    public void modificarSocio(Socio socio){
+       
+       String sql = "UPDATE socio SET dni_socio = ?, apellido_socio = ?, nombre_socio = ?,edad_socio = ?,correo_socio= ? ,telefono_socio = ? "
+               + "WHERE id_socio = ?";
+     
+       try {
+           
+           PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, socio.getDni_socio());
+            ps.setString(2, socio.getNombre_socio());
+            ps.setString(3, socio.getApellido_socio());
+            ps.setInt(4, socio.getEdad_socio());
+            ps.setString(5, socio.getCorreo_socio());
+            ps.setString(6, socio.getTelefono_socio());
+            ps.setInt(7, socio.getId_socio());
+            
+            
+           
+           int exito = ps.executeUpdate();
+           if(exito>0){
+               
+               JOptionPane.showMessageDialog(null,"Socio modificado.");
+           }
+           
+       } catch (Exception e) {
+           JOptionPane.showMessageDialog(null, "Error al acceder a la tabla socio. " + e);
+       }
+   }
 }
