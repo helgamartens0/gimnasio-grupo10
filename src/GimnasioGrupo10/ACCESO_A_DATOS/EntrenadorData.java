@@ -67,7 +67,7 @@ public class EntrenadorData {
                 entren.setEspecialidad_entrenador(rs.getString("especialidad_entrenador"));
                 entren.setEstado_entrenador(rs.getBoolean("estado_entrenador"));
                 
-                JOptionPane.showMessageDialog(null, "Entrenador encontrado con exito!!!");
+//                JOptionPane.showMessageDialog(null, "Entrenador encontrado con exito!!!");
             }
             else{
                 JOptionPane.showMessageDialog(null, "No existe ese entrenador");

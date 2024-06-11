@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package helgafinal_prueba.VISTAS;
+package GimnasioGrupo10.VISTAS;
 
-import helgafinal_prueba.ACCESO_A_DATOS.ClaseData;
-import helgafinal_prueba.ACCESO_A_DATOS.EntrenadorData;
-import helgafinal_prueba.ENTIDADES.Clase;
-import helgafinal_prueba.ENTIDADES.Entrenador;
+import GimnasioGrupo10.ACCESO_A_DATOS.ClaseData;
+import GimnasioGrupo10.ACCESO_A_DATOS.EntrenadorData;
+import GimnasioGrupo10.ENTIDADES.Clase;
+import GimnasioGrupo10.ENTIDADES.Entrenador;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -60,7 +60,7 @@ public class FormClase extends javax.swing.JInternalFrame {
         jlCodigo = new javax.swing.JLabel();
         jtCodigo = new javax.swing.JTextField();
         jcbHorario = new javax.swing.JComboBox<>();
-        jcbEntrenador = new javax.swing.JComboBox<>();
+        jcbEntrenadores = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setTitle("CLASES");
@@ -148,7 +148,7 @@ public class FormClase extends javax.swing.JInternalFrame {
             }
         });
 
-        jcbEntrenador.setEnabled(false);
+        jcbEntrenadores.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -177,7 +177,7 @@ public class FormClase extends javax.swing.JInternalFrame {
                             .addComponent(jtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                             .addComponent(jcbHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jcbEntrenador, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jcbEntrenadores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jbNuevo)
                         .addGap(18, 18, 18)
@@ -205,7 +205,7 @@ public class FormClase extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlDNIEntrenador)
-                    .addComponent(jcbEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbEntrenadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jlHorario)
@@ -243,7 +243,7 @@ public class FormClase extends javax.swing.JInternalFrame {
             clas = claseData.buscarClaseId(id);
             if (clas != null) {
                 jtNombre.setText(clas.getNombre_clase());
-                jcbEntrenador.setSelectedItem(clas.getEntrenador().getId_entrenador());
+                jcbEntrenadores.setSelectedItem(clas.getEntrenador().getId_entrenador());
                 jcbHorario.setSelectedItem(clas.getHora_clase());
                 jtCapacidad.setText(String.valueOf(clas.getCapacidad_clase()));
                 jrbEstado.setSelected(clas.isEstado_clase());
@@ -274,7 +274,7 @@ public class FormClase extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
        
         jtNombre.setEnabled(true);
-        jcbEntrenador.setEnabled(true);
+        jcbEntrenadores.setEnabled(true);
         jcbHorario.setEnabled(true);
         jtCapacidad.setEnabled(true);
         jrbEstado.setEnabled(true);
@@ -284,7 +284,7 @@ public class FormClase extends javax.swing.JInternalFrame {
     private void limpiarCampos() {
         jtCodigo.setText("");
         jtNombre.setText("");
-        jcbEntrenador.setSelectedIndex(0);
+        jcbEntrenadores.setSelectedIndex(0);
         jcbHorario.setSelectedIndex(0);
         jrbEstado.setSelected(false);
     }
@@ -305,8 +305,8 @@ public class FormClase extends javax.swing.JInternalFrame {
 
     private void cargarEntrenadores() {
         for (Entrenador entr : listaE) {
-            String datos = entr.jcbEntrenadores();
-            jcbEntrenador.addItem(datos);
+            String datos = entr.jcbEntrenador();
+            jcbEntrenadores.addItem(datos);
         }
     }
 
@@ -330,7 +330,7 @@ public class FormClase extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JComboBox<String> jcbEntrenador;
+    private javax.swing.JComboBox<String> jcbEntrenadores;
     private javax.swing.JComboBox<LocalTime> jcbHorario;
     private javax.swing.JLabel jlCapacidad;
     private javax.swing.JLabel jlClase;

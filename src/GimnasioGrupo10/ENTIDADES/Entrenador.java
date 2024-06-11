@@ -86,5 +86,10 @@ public class Entrenador {
     public String toString() {
         return "Entrenador{" + "\nid=" + id_entrenador + "\ndni=" + dni_entrenador + "\nnombre=" + nombre_entrenador + "\napellido=" + apellido_entrenador + "\nespecialidad=" + especialidad_entrenador + "\nestado=" + estado_entrenador + "\n}";
     }
+    
+    public String jcbEntrenador(){
+        return id_entrenador +" - "+nombre_entrenador+" "+apellido_entrenador;
+               
+    }
 }
 
