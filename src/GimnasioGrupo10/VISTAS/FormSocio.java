@@ -40,10 +40,10 @@ public class FormSocio extends javax.swing.JInternalFrame {
         jbEliminar = new javax.swing.JButton();
         jtNombre = new javax.swing.JTextField();
         jbSalir = new javax.swing.JButton();
-        jtDNI = new javax.swing.JTextField();
+        jtCodigo = new javax.swing.JTextField();
         jtEdad = new javax.swing.JTextField();
         jlEdad = new javax.swing.JLabel();
-        jlDNI = new javax.swing.JLabel();
+        jlCodigo = new javax.swing.JLabel();
         jlApellido = new javax.swing.JLabel();
         jbBuscar = new javax.swing.JButton();
         jlSocio = new javax.swing.JLabel();
@@ -55,6 +55,8 @@ public class FormSocio extends javax.swing.JInternalFrame {
         jlTelefono = new javax.swing.JLabel();
         jtCorreo = new javax.swing.JTextField();
         jlCorreo = new javax.swing.JLabel();
+        jlDNI = new javax.swing.JLabel();
+        jtDni = new javax.swing.JTextField();
 
         setClosable(true);
         setTitle("SOCIOS");
@@ -88,9 +90,9 @@ public class FormSocio extends javax.swing.JInternalFrame {
             }
         });
 
-        jtDNI.addActionListener(new java.awt.event.ActionListener() {
+        jtCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtDNIActionPerformed(evt);
+                jtCodigoActionPerformed(evt);
             }
         });
 
@@ -98,9 +100,9 @@ public class FormSocio extends javax.swing.JInternalFrame {
         jlEdad.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jlEdad.setText("Edad");
 
-        jlDNI.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jlDNI.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jlDNI.setText("DNI");
+        jlCodigo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jlCodigo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jlCodigo.setText("Codigo");
 
         jlApellido.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jlApellido.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -140,74 +142,76 @@ public class FormSocio extends javax.swing.JInternalFrame {
         jlCorreo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jlCorreo.setText("Correo");
 
+        jlDNI.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jlDNI.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jlDNI.setText("DNI");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jlSocio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jlSocio, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jlEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jrbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtDni, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(31, 31, 31)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jlEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addComponent(jrbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jbNuevo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbGuardar)
-                                .addGap(37, 37, 37)))
-                        .addComponent(jbEliminar)
-                        .addGap(31, 31, 31)
-                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(75, Short.MAX_VALUE))
+                        .addGap(40, 40, 40)
+                        .addComponent(jbNuevo)
+                        .addGap(25, 25, 25)
+                        .addComponent(jbGuardar)
+                        .addGap(37, 37, 37)
+                        .addComponent(jbEliminar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(jtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addComponent(jlSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlCodigo)
+                    .addComponent(jtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtDni, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlDNI))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlApellido))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jlNombre)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jlApellido)
-                        .addGap(18, 18, 18)
-                        .addComponent(jlNombre))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jlDNI))
-                        .addGap(18, 18, 18)
-                        .addComponent(jtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)))
                 .addGap(19, 19, 19)
@@ -224,17 +228,17 @@ public class FormSocio extends javax.swing.JInternalFrame {
                         .addComponent(jtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlEstado)
                     .addComponent(jrbEstado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbNuevo)
                     .addComponent(jbGuardar)
                     .addComponent(jbEliminar)
                     .addComponent(jbSalir))
-                .addGap(18, 18, 18))
+                .addGap(29, 29, 29))
         );
 
         pack();
@@ -246,18 +250,18 @@ public class FormSocio extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jbSalirMouseClicked
 
-    private void jtDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtDNIActionPerformed
+    private void jtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCodigoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtDNIActionPerformed
+    }//GEN-LAST:event_jtCodigoActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         // TODO add your handling code here:
         try{
-            Integer dni = Integer.parseInt(jtDNI.getText());
-            socio = socioData.buscarSocioDni(dni);
+            Integer id = Integer.parseInt(jtCodigo.getText());
+            socio = socioData.buscarSocioId(id);
 
             if (socio != null) {
-                jtDNI.setText(String.valueOf(socio.getDni_socio()));
+                jtDni.setText(String.valueOf(socio.getDni_socio()));
                 jtApellido.setText(String.valueOf(socio.getApellido_socio()));
                 jtNombre.setText(String.valueOf(socio.getNombre_socio()));
                 jtEdad.setText(String.valueOf(socio.getEdad_socio()));
@@ -290,7 +294,7 @@ public class FormSocio extends javax.swing.JInternalFrame {
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
         try{
-            Integer dni = Integer.parseInt(jtDNI.getText());
+            Integer dni = Integer.parseInt(jtCodigo.getText());
             String nombre = jtNombre.getText();
             String apellido = jtApellido.getText();
             Integer edad = Integer.parseInt(jtEdad.getText());
@@ -324,7 +328,7 @@ public class FormSocio extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbGuardarActionPerformed
     private void limpiarCampos(){
     
-        jtDNI.setText("");
+        jtCodigo.setText("");
         jtApellido.setText("");
         jtNombre.setText("");
         jrbEstado.setSelected(true);
@@ -341,6 +345,7 @@ public class FormSocio extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;
     private javax.swing.JLabel jlApellido;
+    private javax.swing.JLabel jlCodigo;
     private javax.swing.JLabel jlCorreo;
     private javax.swing.JLabel jlDNI;
     private javax.swing.JLabel jlEdad;
@@ -350,8 +355,9 @@ public class FormSocio extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlTelefono;
     private javax.swing.JRadioButton jrbEstado;
     private javax.swing.JTextField jtApellido;
+    private javax.swing.JTextField jtCodigo;
     private javax.swing.JTextField jtCorreo;
-    private javax.swing.JTextField jtDNI;
+    private javax.swing.JTextField jtDni;
     private javax.swing.JTextField jtEdad;
     private javax.swing.JTextField jtNombre;
     private javax.swing.JTextField jtTelefono;

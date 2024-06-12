@@ -26,86 +26,82 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jlSocio" alignment="1" pref="470" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jlSocio" pref="458" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jlNombre" alignment="0" min="-2" pref="58" max="-2" attributes="0"/>
+                          <Component id="jlCodigo" alignment="0" min="-2" pref="58" max="-2" attributes="0"/>
+                          <Component id="jlCorreo" alignment="0" min="-2" pref="58" max="-2" attributes="0"/>
                           <Component id="jlApellido" alignment="0" min="-2" pref="58" max="-2" attributes="0"/>
                           <Component id="jlDNI" alignment="0" min="-2" pref="58" max="-2" attributes="0"/>
-                          <Component id="jlEdad" alignment="0" min="-2" pref="45" max="-2" attributes="0"/>
-                          <Component id="jlCorreo" alignment="0" min="-2" pref="58" max="-2" attributes="0"/>
+                          <Component id="jlEstado" alignment="0" min="-2" pref="58" max="-2" attributes="0"/>
+                          <Component id="jlNombre" alignment="0" min="-2" pref="58" max="-2" attributes="0"/>
                           <Component id="jlTelefono" alignment="0" min="-2" pref="58" max="-2" attributes="0"/>
+                          <Component id="jlEdad" alignment="0" min="-2" pref="45" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      <EmptySpace min="29" pref="29" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jtTelefono" min="-2" pref="143" max="-2" attributes="0"/>
                           <Component id="jtCorreo" min="-2" pref="200" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Component id="jtEdad" min="-2" pref="143" max="-2" attributes="0"/>
+                          <Component id="jtNombre" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                          <Component id="jrbEstado" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jtEdad" min="-2" pref="143" max="-2" attributes="0"/>
-                                  <Component id="jtNombre" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                  <Component id="jtApellido" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                  <Component id="jtDNI" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                                  <Component id="jtCodigo" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                                  <Component id="jtDni" alignment="1" min="-2" pref="143" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jbBuscar" min="-2" pref="70" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jbBuscar" min="-2" pref="70" max="-2" attributes="0"/>
+                                  <Component id="jbSalir" min="-2" pref="77" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jlEstado" min="-2" pref="58" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                              <Component id="jrbEstado" min="-2" pref="80" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jbNuevo" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jbGuardar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
+                      <Component id="jbNuevo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="jbGuardar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Component id="jbEliminar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                      <Component id="jbSalir" min="-2" pref="77" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="127" pref="127" max="-2" attributes="0"/>
+                      <Component id="jtApellido" min="-2" pref="200" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="75" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Component id="jlSocio" min="-2" pref="43" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jlCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbBuscar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="12" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jtDni" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlDNI" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jtApellido" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlApellido" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jlNombre" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="jlApellido" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jlNombre" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                              <Component id="jtDNI" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jbBuscar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jlDNI" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jtApellido" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jtNombre" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
                   </Group>
@@ -128,19 +124,19 @@
                       <Component id="jtCorreo" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jlEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jrbEstado" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="53" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jbNuevo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbEliminar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbSalir" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -190,9 +186,9 @@
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbSalirMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jtDNI">
+    <Component class="javax.swing.JTextField" name="jtCodigo">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtDNIActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtCodigoActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jtEdad">
@@ -206,13 +202,13 @@
         <Property name="text" type="java.lang.String" value="Edad"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jlDNI">
+    <Component class="javax.swing.JLabel" name="jlCodigo">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="14" style="0"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="2"/>
-        <Property name="text" type="java.lang.String" value="DNI"/>
+        <Property name="text" type="java.lang.String" value="Codigo"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jlApellido">
@@ -292,6 +288,17 @@
         <Property name="horizontalAlignment" type="int" value="2"/>
         <Property name="text" type="java.lang.String" value="Correo"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlDNI">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="14" style="0"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="2"/>
+        <Property name="text" type="java.lang.String" value="DNI"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtDni">
     </Component>
   </SubComponents>
 </Form>

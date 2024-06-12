@@ -40,6 +40,7 @@ public class Menuu extends javax.swing.JFrame {
         jmConsultas = new javax.swing.JMenu();
         jmiListClase = new javax.swing.JMenuItem();
         jmiListEntrenador = new javax.swing.JMenuItem();
+        jmiListSocios = new javax.swing.JMenuItem();
         jmSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -122,6 +123,14 @@ public class Menuu extends javax.swing.JFrame {
             }
         });
         jmConsultas.add(jmiListEntrenador);
+
+        jmiListSocios.setText("Listado de Socios");
+        jmiListSocios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiListSociosActionPerformed(evt);
+            }
+        });
+        jmConsultas.add(jmiListSocios);
 
         jMenuBar1.add(jmConsultas);
 
@@ -220,6 +229,15 @@ public class Menuu extends javax.swing.JFrame {
         escritorio.add(fLEntrenador);
     }//GEN-LAST:event_jmiListEntrenadorActionPerformed
 
+    private void jmiListSociosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListSociosActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        FormListSocio fLSocio= new FormListSocio();
+        fLSocio.setVisible(true);
+        escritorio.add(fLSocio);
+    }//GEN-LAST:event_jmiListSociosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -267,6 +285,7 @@ public class Menuu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiFormSocio;
     private javax.swing.JMenuItem jmiListClase;
     private javax.swing.JMenuItem jmiListEntrenador;
+    private javax.swing.JMenuItem jmiListSocios;
     private javax.swing.JMenuItem jmiMembresia;
     // End of variables declaration//GEN-END:variables
 }

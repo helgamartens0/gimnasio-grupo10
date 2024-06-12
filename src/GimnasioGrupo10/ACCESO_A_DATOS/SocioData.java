@@ -55,9 +55,10 @@ public class SocioData {
     
     public List<Socio> listarSociosActivos() {
         ArrayList<Socio> socios = new ArrayList<>();
-        
-        String sql = "SELECT dni_socio,nombre_socio,apellido_socio,edad_socio,correo_socio,telefono_socio,estado_socio "
-                + " FROM socio WHERE estado_socio = 1";
+        String sql = "SELECT `id_socio`, `dni_socio`, `nombre_socio`, `apellido_socio`, `edad_socio`, `correo_socio`, `telefono_socio`, `estado_socio`"
+                + " FROM `socio` WHERE estado_socio=1";
+//        String sql = "SELECT dni_socio,nombre_socio,apellido_socio,edad_socio,correo_socio,telefono_socio,estado_socio "
+//                + " FROM socio WHERE estado_socio = 1";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -85,9 +86,10 @@ public class SocioData {
     
     public List<Socio> listarSociosInactivos() {
         ArrayList<Socio> socios = new ArrayList<>();
-        
-        String sql = "SELECT dni_socio,nombre_socio,apellido_socio,edad_socio,correo_socio,telefono_socio,estado_socio "
-                + " FROM socio WHERE estado_socio = 0";
+        String sql = "SELECT `id_socio`, `dni_socio`, `nombre_socio`, `apellido_socio`, `edad_socio`, `correo_socio`, `telefono_socio`, `estado_socio`"
+                + " FROM `socio` WHERE estado_socio=0";
+//        String sql = "SELECT dni_socio,nombre_socio,apellido_socio,edad_socio,correo_socio,telefono_socio,estado_socio "
+//                + " FROM socio WHERE estado_socio = 0";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
