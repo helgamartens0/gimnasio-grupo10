@@ -66,7 +66,7 @@ public class ClaseData {
                 clase.setId_clase(rs.getInt(1));
             }
             ps.close();
-            JOptionPane.showMessageDialog(null, "Clase agregada con exito!!!");
+//            JOptionPane.showMessageDialog(null, "Clase agregada con exito!!!");
         } catch (SQLException ex) {
             System.out.println("error al acceder a la tabla de Clases");
 
