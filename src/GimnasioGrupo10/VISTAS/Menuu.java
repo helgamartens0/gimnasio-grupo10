@@ -216,9 +216,9 @@ public class Menuu extends javax.swing.JFrame {
         // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
-        FormMembresia fMembresia = new FormMembresia();
-        fMembresia.setVisible(true);
-        escritorio.add(fMembresia);
+        FormListadoMembresia fLMembresia = new FormListadoMembresia();
+        fLMembresia.setVisible(true);
+        escritorio.add(fLMembresia);
     }//GEN-LAST:event_jmiMembresiaActionPerformed
 
     private void jmiListClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListClaseActionPerformed
