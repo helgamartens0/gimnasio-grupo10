@@ -124,7 +124,7 @@ public class SocioData {
             ps.setString(1, "%"+nombre.toLowerCase()+"%");
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "Socio(s) encontrado(s) con exito!!!");
+//                JOptionPane.showMessageDialog(null, "Socio(s) encontrado(s) con exito!!!");
                 
                 do {
                     
@@ -154,7 +154,7 @@ public class SocioData {
     
     public Socio buscarSocioId(int id_socio) {
         String sql = "SELECT dni_socio,nombre_socio,apellido_socio,edad_socio,correo_socio,telefono_socio,estado_socio FROM socio "
-                + "WHERE id_socio = ?";
+                + "WHERE id_socio = ? AND estado_socio = 1";
         Socio socio = null;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -175,7 +175,7 @@ public class SocioData {
                 socio.setTelefono_socio(rs.getString("telefono_socio"));
                 socio.setEstado_socio(rs.getBoolean("estado_socio"));
                 
-                JOptionPane.showMessageDialog(null, "Socio encontrado con exito!!!");
+//                JOptionPane.showMessageDialog(null, "Socio encontrado con exito!!!");
                 
             } else {
                 JOptionPane.showMessageDialog(null, "No existe ese socio");
@@ -210,7 +210,7 @@ public class SocioData {
                 socio.setTelefono_socio(rs.getString("telefono_socio"));
                 socio.setEstado_socio(true);
                 
-                JOptionPane.showMessageDialog(null, "Socio encontrado con exito!!!");
+//                JOptionPane.showMessageDialog(null, "Socio encontrado con exito!!!");
              
     
                 

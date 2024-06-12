@@ -39,7 +39,7 @@ public class Conexion {
                 JOptionPane.showMessageDialog(null,"error al conectarse a la base de datos");
             }
         }
-        JOptionPane.showMessageDialog(null,"Conexion EXITOSA");
+        
         return con;
     }
 
