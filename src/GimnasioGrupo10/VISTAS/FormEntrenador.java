@@ -5,11 +5,18 @@
  */
 package GimnasioGrupo10.VISTAS;
 
+import GimnasioGrupo10.ACCESO_A_DATOS.*;
+import GimnasioGrupo10.ENTIDADES.*;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Jesica
  */
 public class FormEntrenador extends javax.swing.JInternalFrame {
+
+    private EntrenadorData entData = new EntrenadorData();
+    private Entrenador entrenador;
 
     /**
      * Creates new form FormEntrenador
@@ -33,7 +40,7 @@ public class FormEntrenador extends javax.swing.JInternalFrame {
         jlEstado = new javax.swing.JLabel();
         jtNombre = new javax.swing.JTextField();
         jtDNI = new javax.swing.JTextField();
-        jtEdad = new javax.swing.JTextField();
+        jtEspecialidad = new javax.swing.JTextField();
         jlEdad = new javax.swing.JLabel();
         jlDNI = new javax.swing.JLabel();
         jlApellido = new javax.swing.JLabel();
@@ -41,7 +48,6 @@ public class FormEntrenador extends javax.swing.JInternalFrame {
         jlNombre = new javax.swing.JLabel();
         jbNuevo = new javax.swing.JButton();
         jbGuardar = new javax.swing.JButton();
-        jbEliminar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
 
         setClosable(true);
@@ -53,16 +59,23 @@ public class FormEntrenador extends javax.swing.JInternalFrame {
         jlEntrenador.setText("ENTRENADOR");
 
         jrbEstado.setText("Activo");
+        jrbEstado.setEnabled(false);
+
+        jtApellido.setEnabled(false);
 
         jlEstado.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jlEstado.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jlEstado.setText("Estado");
+
+        jtNombre.setEnabled(false);
 
         jtDNI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtDNIActionPerformed(evt);
             }
         });
+
+        jtEspecialidad.setEnabled(false);
 
         jlEdad.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jlEdad.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -78,6 +91,11 @@ public class FormEntrenador extends javax.swing.JInternalFrame {
 
         jbBuscar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
 
         jlNombre.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jlNombre.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -85,12 +103,19 @@ public class FormEntrenador extends javax.swing.JInternalFrame {
 
         jbNuevo.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jbNuevo.setText("Nuevo");
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoActionPerformed(evt);
+            }
+        });
 
         jbGuardar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jbGuardar.setText("Guardar");
-
-        jbEliminar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jbEliminar.setText("Eliminar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jbSalir.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jbSalir.setText("Salir");
@@ -133,12 +158,11 @@ public class FormEntrenador extends javax.swing.JInternalFrame {
                                 .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jrbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jbGuardar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jbEliminar))
-                                    .addComponent(jtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(36, 36, 36)
+                                        .addComponent(jbGuardar)))
                                 .addGap(27, 27, 27)
                                 .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 19, Short.MAX_VALUE)))
@@ -166,16 +190,15 @@ public class FormEntrenador extends javax.swing.JInternalFrame {
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                    .addComponent(jtEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlEstado)
                     .addComponent(jrbEstado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbNuevo)
                     .addComponent(jbGuardar)
-                    .addComponent(jbEliminar)
                     .addComponent(jbSalir))
                 .addGap(37, 37, 37))
         );
@@ -193,10 +216,66 @@ public class FormEntrenador extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jbSalirMouseClicked
 
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        // TODO add your handling code here:
+
+        try {
+            Integer dni = Integer.parseInt(jtDNI.getText());
+            entrenador = entData.buscarEntrenadorPorId(dni);
+
+            if (entrenador != null) {
+                jtNombre.setText(entrenador.getNombre_entrenador());
+                jtApellido.setText(entrenador.getApellido_entrenador());
+                jtDNI.setText(entrenador.getDni_entrenador());
+                jtEspecialidad.setText(entrenador.getEspecialidad_entrenador());
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e);
+        }
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+        // TODO add your handling code here:
+
+        jtNombre.setEditable(true);
+        jtApellido.setEnabled(true);
+        jtEspecialidad.setEnabled(true);
+        jrbEstado.setEnabled(true);
+        limpiarCampos();
+        entrenador = null;
+    }//GEN-LAST:event_jbNuevoActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        // TODO add your handling code here:
+
+        try {
+            String dni = jtDNI.getText();
+            String apellido = jtApellido.getText();
+            String nombre = jtNombre.getText();
+            String especialidad = jtEspecialidad.getText();
+            Boolean estado = jrbEstado.isSelected();
+
+            if (dni.isEmpty() || apellido.isEmpty() || nombre.isEmpty() || especialidad.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "NO puede haber campos vacios.");
+            } else {
+                entrenador = new Entrenador(dni, nombre, apellido, especialidad, estado);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e);
+        }
+    }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void limpiarCampos() {
+        jtDNI.setText("");
+        jtNombre.setText("");
+        jtApellido.setText("");
+        jtEspecialidad.setText("");
+        jrbEstado.setSelected(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbBuscar;
-    private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;
@@ -209,7 +288,7 @@ public class FormEntrenador extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jrbEstado;
     private javax.swing.JTextField jtApellido;
     private javax.swing.JTextField jtDNI;
-    private javax.swing.JTextField jtEdad;
+    private javax.swing.JTextField jtEspecialidad;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
 }

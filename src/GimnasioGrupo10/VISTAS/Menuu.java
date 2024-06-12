@@ -39,6 +39,7 @@ public class Menuu extends javax.swing.JFrame {
         jmiEntrenador = new javax.swing.JMenuItem();
         jmConsultas = new javax.swing.JMenu();
         jmiListClase = new javax.swing.JMenuItem();
+        jmiListEntrenador = new javax.swing.JMenuItem();
         jmSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -113,6 +114,14 @@ public class Menuu extends javax.swing.JFrame {
             }
         });
         jmConsultas.add(jmiListClase);
+
+        jmiListEntrenador.setText("Listado de Entrenadores");
+        jmiListEntrenador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiListEntrenadorActionPerformed(evt);
+            }
+        });
+        jmConsultas.add(jmiListEntrenador);
 
         jMenuBar1.add(jmConsultas);
 
@@ -201,6 +210,16 @@ public class Menuu extends javax.swing.JFrame {
             dispose();}
     }//GEN-LAST:event_jmSalirMouseClicked
 
+    private void jmiListEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListEntrenadorActionPerformed
+        // TODO add your handling code here:
+        
+        escritorio.removeAll();
+        escritorio.repaint();
+        FormListadoEntrenadores fLEntrenador= new FormListadoEntrenadores();
+        fLEntrenador.setVisible(true);
+        escritorio.add(fLEntrenador);
+    }//GEN-LAST:event_jmiListEntrenadorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -247,6 +266,7 @@ public class Menuu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiEntrenador;
     private javax.swing.JMenuItem jmiFormSocio;
     private javax.swing.JMenuItem jmiListClase;
+    private javax.swing.JMenuItem jmiListEntrenador;
     private javax.swing.JMenuItem jmiMembresia;
     // End of variables declaration//GEN-END:variables
 }
