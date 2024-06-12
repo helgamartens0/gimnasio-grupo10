@@ -5,8 +5,8 @@
  */
 package GimnasioGrupo10.ENTIDADES;
 
-
 public class Entrenador {
+
     private int id_entrenador;
     private String dni_entrenador;
     private String nombre_entrenador;
@@ -81,15 +81,9 @@ public class Entrenador {
     public void setEstado_entrenador(boolean estado_entrenador) {
         this.estado_entrenador = estado_entrenador;
     }
-    
+
     @Override
     public String toString() {
-        return "Entrenador{" + "\nid=" + id_entrenador + "\ndni=" + dni_entrenador + "\nnombre=" + nombre_entrenador + "\napellido=" + apellido_entrenador + "\nespecialidad=" + especialidad_entrenador + "\nestado=" + estado_entrenador + "\n}";
-    }
-    
-    public String jcbEntrenador(){
-        return id_entrenador +" - "+nombre_entrenador+" "+apellido_entrenador;
-               
+        return id_entrenador + " - " + nombre_entrenador + " " + apellido_entrenador;
     }
 }
-

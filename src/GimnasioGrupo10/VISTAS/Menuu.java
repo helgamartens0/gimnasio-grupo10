@@ -41,6 +41,8 @@ public class Menuu extends javax.swing.JFrame {
         jmiListClase = new javax.swing.JMenuItem();
         jmiListEntrenador = new javax.swing.JMenuItem();
         jmiListSocios = new javax.swing.JMenuItem();
+        jmiListasDisp = new javax.swing.JCheckBoxMenuItem();
+        jmiBusquedaClases = new javax.swing.JCheckBoxMenuItem();
         jmSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -132,6 +134,24 @@ public class Menuu extends javax.swing.JFrame {
         });
         jmConsultas.add(jmiListSocios);
 
+        jmiListasDisp.setSelected(true);
+        jmiListasDisp.setText("Lista Clases Disponibles");
+        jmiListasDisp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiListasDispActionPerformed(evt);
+            }
+        });
+        jmConsultas.add(jmiListasDisp);
+
+        jmiBusquedaClases.setSelected(true);
+        jmiBusquedaClases.setText("Busqueda Clases");
+        jmiBusquedaClases.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiBusquedaClasesActionPerformed(evt);
+            }
+        });
+        jmConsultas.add(jmiBusquedaClases);
+
         jMenuBar1.add(jmConsultas);
 
         jmSalir.setText("SALIR");
@@ -163,7 +183,7 @@ public class Menuu extends javax.swing.JFrame {
         // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
-        FormSocio fSocio= new FormSocio();
+        FormSocio fSocio = new FormSocio();
         fSocio.setVisible(true);
         escritorio.add(fSocio);
     }//GEN-LAST:event_jmiFormSocioActionPerformed
@@ -172,7 +192,7 @@ public class Menuu extends javax.swing.JFrame {
         // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
-        FormClase fClase= new FormClase();
+        FormClase fClase = new FormClase();
         fClase.setVisible(true);
         escritorio.add(fClase);
     }//GEN-LAST:event_jmiClaseActionPerformed
@@ -181,22 +201,22 @@ public class Menuu extends javax.swing.JFrame {
         // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
-        FormEntrenador fEntrenador= new FormEntrenador();
+        FormEntrenador fEntrenador = new FormEntrenador();
         fEntrenador.setVisible(true);
         escritorio.add(fEntrenador);
     }//GEN-LAST:event_jmiEntrenadorActionPerformed
 
     private void jmSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSocioActionPerformed
         // TODO add your handling code here:
-       
-    
+
+
     }//GEN-LAST:event_jmSocioActionPerformed
 
     private void jmiMembresiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiMembresiaActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
-        FormMembresia fMembresia= new FormMembresia();
+        FormMembresia fMembresia = new FormMembresia();
         fMembresia.setVisible(true);
         escritorio.add(fMembresia);
     }//GEN-LAST:event_jmiMembresiaActionPerformed
@@ -205,26 +225,27 @@ public class Menuu extends javax.swing.JFrame {
         // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
-        FormListadoPorClase fLClase= new FormListadoPorClase();
+        FormListadoPorClase fLClase = new FormListadoPorClase();
         fLClase.setVisible(true);
         escritorio.add(fLClase);
     }//GEN-LAST:event_jmiListClaseActionPerformed
 
     private void jmSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmSalirMouseClicked
         // TODO add your handling code here:
-        
-        int confirm = JOptionPane.showConfirmDialog(null, "Desea salir del menu ?","MENU", JOptionPane.YES_NO_OPTION);
-        
-        if(confirm==0){
-            dispose();}
+
+        int confirm = JOptionPane.showConfirmDialog(null, "Desea salir del menu ?", "MENU", JOptionPane.YES_NO_OPTION);
+
+        if (confirm == 0) {
+            dispose();
+        }
     }//GEN-LAST:event_jmSalirMouseClicked
 
     private void jmiListEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListEntrenadorActionPerformed
         // TODO add your handling code here:
-        
+
         escritorio.removeAll();
         escritorio.repaint();
-        FormListadoEntrenadores fLEntrenador= new FormListadoEntrenadores();
+        FormListadoEntrenadores fLEntrenador = new FormListadoEntrenadores();
         fLEntrenador.setVisible(true);
         escritorio.add(fLEntrenador);
     }//GEN-LAST:event_jmiListEntrenadorActionPerformed
@@ -233,10 +254,32 @@ public class Menuu extends javax.swing.JFrame {
         // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
-        FormListSocio fLSocio= new FormListSocio();
+        FormListSocio fLSocio = new FormListSocio();
         fLSocio.setVisible(true);
         escritorio.add(fLSocio);
     }//GEN-LAST:event_jmiListSociosActionPerformed
+
+    private void jmiListasDispActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListasDispActionPerformed
+        // TODO add your handling code here:
+
+        escritorio.removeAll();
+        escritorio.repaint();
+        ListadoClasesDisp cd = new ListadoClasesDisp();
+        cd.setVisible(true);
+        escritorio.add(cd);
+        escritorio.moveToFront(cd);
+    }//GEN-LAST:event_jmiListasDispActionPerformed
+
+    private void jmiBusquedaClasesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiBusquedaClasesActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        BusquedaClases bc = new BusquedaClases();
+        bc.setVisible(true);
+        escritorio.add(bc);
+        escritorio.moveToFront(bc);
+
+    }//GEN-LAST:event_jmiBusquedaClasesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -280,12 +323,14 @@ public class Menuu extends javax.swing.JFrame {
     private javax.swing.JMenu jmConsultas;
     private javax.swing.JMenu jmSalir;
     private javax.swing.JMenu jmSocio;
+    private javax.swing.JCheckBoxMenuItem jmiBusquedaClases;
     private javax.swing.JMenuItem jmiClase;
     private javax.swing.JMenuItem jmiEntrenador;
     private javax.swing.JMenuItem jmiFormSocio;
     private javax.swing.JMenuItem jmiListClase;
     private javax.swing.JMenuItem jmiListEntrenador;
     private javax.swing.JMenuItem jmiListSocios;
+    private javax.swing.JCheckBoxMenuItem jmiListasDisp;
     private javax.swing.JMenuItem jmiMembresia;
     // End of variables declaration//GEN-END:variables
 }
