@@ -189,7 +189,7 @@ public class SocioData {
     }
     public Socio buscarSocioDni(int dni_socio) {
         String sql = "SELECT id_socio,dni_socio,nombre_socio,apellido_socio,edad_socio,correo_socio,telefono_socio,estado_socio FROM socio "
-                + "WHERE dni_socio = ? AND estado_socio=1";
+                + "WHERE dni_socio = ?";
         Socio socio = null;
         
         try {
@@ -208,7 +208,7 @@ public class SocioData {
                 socio.setEdad_socio(rs.getInt("edad_socio"));
                 socio.setCorreo_socio(rs.getString("correo_socio"));
                 socio.setTelefono_socio(rs.getString("telefono_socio"));
-                socio.setEstado_socio(true);
+                socio.setEstado_socio(rs.getBoolean("estado_socio"));
                 
 //                JOptionPane.showMessageDialog(null, "Socio encontrado con exito!!!");
              
