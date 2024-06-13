@@ -20,8 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `helgafinal`
 --
-CREATE DATABASE IF NOT EXISTS `helgafinal` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `helgafinal`;
+CREATE DATABASE IF NOT EXISTS `gimnasio-grupo10` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `gimnasio-grupo10`;
 
 -- --------------------------------------------------------
 
