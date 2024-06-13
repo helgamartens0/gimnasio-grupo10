@@ -245,30 +245,33 @@ public class FormListadoMembresia extends javax.swing.JInternalFrame {
     private void jbRenovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRenovarActionPerformed
         // TODO add your handling code here:
 
-            try {
-        int filaSeleccionada = jTabla.getSelectedRow();
-        if (filaSeleccionada == -1) {
-            JOptionPane.showMessageDialog(null, "Por favor seleccione una fila.");
-            return;
-        }
+           
+        try {
+            int filaSeleccionada = jTabla.getSelectedRow();
+            if (filaSeleccionada == -1) {
+                JOptionPane.showMessageDialog(null, "Por favor seleccione una fila.");
+                return;
+            }
 
-        Socio soc = (Socio) jcbMembresia.getSelectedItem();
-        int cantPases = (Integer) modelo.getValueAt(filaSeleccionada, 2);
+            Socio soc = (Socio) jcbMembresia.getSelectedItem();
+            int cantPases = (Integer) modelo.getValueAt(filaSeleccionada, 2);
 
-        Date fechaDate = (Date) modelo.getValueAt(filaSeleccionada, 3);
-        LocalDate fechaInc = fechaDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//        Date fechaDate = (Date) modelo.getValueAt(filaSeleccionada, 3);
+            LocalDate fechaInc = LocalDate.now();
+            LocalDate fechaFin = fechaInc.plusMonths(6);
+            
+//            Date dateInc = Date.from(fechaInc.atStartOfDay(ZoneId.systemDefault()).toInstant());
+//            Date dateFin = Date.from(fechaFin.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            
+            Double valor = (Double) modelo.getValueAt(filaSeleccionada, 5);
+            Boolean estado = (Boolean) modelo.getValueAt(filaSeleccionada, 6);
 
-        Date fechaDate2 = (Date) modelo.getValueAt(filaSeleccionada, 4);
-        LocalDate fechaFin = fechaDate2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            Membresia membresia = new Membresia(soc, cantPases, fechaInc, fechaFin, valor, estado);
+            memData.cargarMembresia(membresia);
+            memData.renovarMembresia(membresia.getId_membresia(), fechaFin, cantPases);
 
-        Double valor = (Double) modelo.getValueAt(filaSeleccionada, 5);
-        Boolean estado = (Boolean) modelo.getValueAt(filaSeleccionada, 6);
+            borrarFilaTabla();
 
-        Membresia membresia = new Membresia(soc, cantPases, fechaInc, fechaFin, valor, estado);
-
-        memData.renovarMembresia(membresia.getId_membresia(), fechaFin, cantPases);
-        
-        borrarFilaTabla();
 
     } catch (Exception e) {
         JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());

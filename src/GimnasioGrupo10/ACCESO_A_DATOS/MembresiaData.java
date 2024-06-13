@@ -91,14 +91,14 @@ public class MembresiaData {
         return membresias;
     }
 
-    public void renovarMembresia(int idMembresia, LocalDate nuevaFechaFin, int nuevaCantPases) {
-        String sql = "UPDATE membresia SET fecha_fin = ?, cantidad_pases = ?, estado_membresia = 1 WHERE id_membresia = ?";
+     public void renovarMembresia(int idMembresia, LocalDate nuevaFechaFin, int nuevaCantPases) {
+        String sql = "UPDATE membresia SET id_membresia = ?, fecha_fin = ?, cantidad_pases = ?, estado_membresia = 1 WHERE id_membresia = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setDate(1, Date.valueOf(nuevaFechaFin));
-            ps.setInt(2, nuevaCantPases);
-            ps.setInt(3, idMembresia);
+            ps.setInt(1, idMembresia);
+            ps.setDate(2, Date.valueOf(nuevaFechaFin));
+            ps.setInt(3, nuevaCantPases);
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Membresia renovada con exito");
         } catch (Exception e) {
@@ -107,6 +107,7 @@ public class MembresiaData {
 
         }
     }
+
 //
 
     public void cancelarMembresia(int idMembresia) {
