@@ -20,6 +20,7 @@ public class FormListSocio extends javax.swing.JInternalFrame {
     private List<Socio> listaInactivos;
    
     private SocioData socioData  = new SocioData();
+    private Socio socio=new Socio();
 
     private DefaultTableModel modelo;
     /**
@@ -48,6 +49,9 @@ public class FormListSocio extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtTabla = new javax.swing.JTable();
         jbSalir = new javax.swing.JButton();
+        jbAlta = new javax.swing.JButton();
+        jbBaja = new javax.swing.JButton();
+        actualizar = new javax.swing.JButton();
 
         setClosable(true);
         setPreferredSize(new java.awt.Dimension(480, 471));
@@ -90,29 +94,56 @@ public class FormListSocio extends javax.swing.JInternalFrame {
             }
         });
 
+        jbAlta.setText("Alta");
+        jbAlta.setEnabled(false);
+        jbAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAltaActionPerformed(evt);
+            }
+        });
+
+        jbBaja.setText("Baja");
+        jbBaja.setEnabled(false);
+        jbBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBajaActionPerformed(evt);
+            }
+        });
+
+        actualizar.setText("Actualizar Lista");
+        actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actualizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jlSocio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
-                        .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbSalir)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(122, 122, 122)
                 .addComponent(jrbActivos)
                 .addGap(70, 70, 70)
                 .addComponent(jrbInactivos)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlSocio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jbAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(actualizar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbSalir)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,8 +157,12 @@ public class FormListSocio extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
-                .addComponent(jbSalir)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbSalir)
+                    .addComponent(jbAlta)
+                    .addComponent(jbBaja)
+                    .addComponent(actualizar))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         pack();
@@ -138,7 +173,8 @@ public class FormListSocio extends javax.swing.JInternalFrame {
         borrarFilaTabla();
         jrbActivos.setSelected(false);
         cargaDatosInactivos();
-        
+        jbBaja.setEnabled(false);
+        jbAlta.setEnabled(true);
 
     }//GEN-LAST:event_jrbInactivosActionPerformed
 
@@ -148,12 +184,52 @@ public class FormListSocio extends javax.swing.JInternalFrame {
         borrarFilaTabla();
         jrbInactivos.setSelected(false);
         cargaDatosActivos();  
+        jbBaja.setEnabled(true);
+        jbAlta.setEnabled(false);
+        
     }//GEN-LAST:event_jrbActivosActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jbAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAltaActionPerformed
+        // TODO add your handling code here:
+        int filaSeleccionada = jtTabla.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            
+            int idSocio = (Integer) modelo.getValueAt(filaSeleccionada, 0);
+            socioData.altaSocio(idSocio);
+            borrarFilaTabla();
+            
+        }
+    }//GEN-LAST:event_jbAltaActionPerformed
+
+    private void jbBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBajaActionPerformed
+        // TODO add your handling code here:
+        int filaSeleccionada = jtTabla.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            
+            int idSocio = (Integer) modelo.getValueAt(filaSeleccionada, 0);
+            socioData.eliminarSocio(idSocio);
+            borrarFilaTabla();
+            
+        
+        }        
+    }//GEN-LAST:event_jbBajaActionPerformed
+
+    private void actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarActionPerformed
+        // TODO add your handling code here:
+        actualizarListas();
+        borrarFilaTabla();
+
+        if (jrbActivos.isSelected()) {
+            cargaDatosActivos();
+        } else if (jrbInactivos.isSelected()) {
+            cargaDatosInactivos();
+        }
+    }//GEN-LAST:event_actualizarActionPerformed
     private void armarCabeceraTabla() {
         ArrayList<Object> filaCabecera = new ArrayList<>();
         filaCabecera.add("ID");
@@ -190,9 +266,15 @@ public class FormListSocio extends javax.swing.JInternalFrame {
             modelo.addRow(new Object[]{s.getId_socio(), s.getNombre_socio(), s.getApellido_socio(), s.getEdad_socio(), s.getCorreo_socio(),s.getTelefono_socio()});
         }
     }
-
+    private void actualizarListas() {
+        listaActivos = socioData.listarSociosActivos();
+        listaInactivos = socioData.listarSociosInactivos();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton actualizar;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbAlta;
+    private javax.swing.JButton jbBaja;
     private javax.swing.JButton jbSalir;
     private javax.swing.JLabel jlSocio;
     private javax.swing.JRadioButton jrbActivos;
