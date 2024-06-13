@@ -7,17 +7,20 @@ package GimnasioGrupo10.VISTAS;
 
 import GimnasioGrupo10.ACCESO_A_DATOS.AsistenciaData;
 import GimnasioGrupo10.ACCESO_A_DATOS.ClaseData;
+import GimnasioGrupo10.ACCESO_A_DATOS.MembresiaData;
 import GimnasioGrupo10.ACCESO_A_DATOS.SocioData;
 import GimnasioGrupo10.ENTIDADES.Asistencia;
 import GimnasioGrupo10.ENTIDADES.Clase;
 import GimnasioGrupo10.ENTIDADES.Entrenador;
+import GimnasioGrupo10.ENTIDADES.Membresia;
 import GimnasioGrupo10.ENTIDADES.Socio;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -29,9 +32,12 @@ public class FormAsistencia extends javax.swing.JInternalFrame {
 
     private ClaseData claseData = new ClaseData();
     private AsistenciaData asistData = new AsistenciaData();
+    private MembresiaData membData = new MembresiaData();
+
     private Clase clase;
     private Asistencia asistencia;
     private Socio socio;
+    private Membresia membresia;
 
     public FormAsistencia() {
         initComponents();
@@ -233,20 +239,47 @@ public class FormAsistencia extends javax.swing.JInternalFrame {
         if (jtDni.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "El campo DNI esta vacio");
         }
-        
-        socio = socioData.buscarSocioDNI(Integer.parseInt(jtDni.getText()));
-        if (socio == null) {
-            JOptionPane.showMessageDialog(this, "Socio no encontrado");
-            return;
-        }
-        if (socio.isEstado_socio() == false) {
-            JOptionPane.showMessageDialog(this, "El socio no cuenta con membresia activa");
-        } else {
-            jbConfirmar.setEnabled(true);
-            jcbHorario.setEnabled(true);
-            jtNombre.setText(socio.getNombre_socio());
-            jtApellido.setText(socio.getApellido_socio());
-            JOptionPane.showMessageDialog(this, "usuario OK");
+        try {
+            int dni = Integer.parseInt(jtDni.getText());
+            socio = socioData.buscarSocioDNI2(dni);
+            socio.toString();
+//            int id_socio1 = socio.getId_socio();
+//            JOptionPane.showMessageDialog(this, id_socio1);
+
+            if (socio != null) {
+                JOptionPane.showMessageDialog(this, "socio encontrado");
+                if (!socio.isEstado_socio()) {
+                    JOptionPane.showMessageDialog(this, "SOCIO INACTIVO");
+                    jtDni.setText("");
+                    jbConfirmar.setEnabled(false);
+                    jcbHorario.setEnabled(false);
+                    return;
+                } else {
+//                    int id_socio = socio.getId_socio();
+//                    JOptionPane.showMessageDialog(this, id_socio);
+
+                    LocalDate hoy = LocalDate.now();
+//                    JOptionPane.showMessageDialog(this,hoy);
+//                    JOptionPane.showMessageDialog(this, socio.getId_socio()); 
+                    boolean memAct = membData.membresiaActual(socio.getId_socio(), hoy);
+//                    JOptionPane.showMessageDialog(this, "socio ACTIVO");
+                    if (memAct) {
+//                        JOptionPane.showMessageDialog(this, "MEMBRESIA ACTIVA PODES INSCRIBIR TRANKI");
+                        jbConfirmar.setEnabled(true);
+                        jcbHorario.setEnabled(true);
+                        jtNombre.setText(socio.getNombre_socio());
+                        jtApellido.setText(socio.getApellido_socio());
+                    } else {
+                        JOptionPane.showMessageDialog(this, "No cuenta con membresia activa a la fecha de hoy");
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Socio NO encontrado");
+                jtDni.setText("");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "error. numero invalido");
         }
 
     }//GEN-LAST:event_jbBuscarActionPerformed
@@ -258,10 +291,9 @@ public class FormAsistencia extends javax.swing.JInternalFrame {
 
     private void jbConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfirmarActionPerformed
         LocalDate fecha = LocalDate.now();
-        socio = socioData.buscarSocioDNI(Integer.parseInt(jtDni.getText()));
-        clase = claseData.buscarClaseHorario((LocalTime) jcbHorario.getSelectedItem());
-        asistencia = new Asistencia(socio,clase,fecha);
-        asistData.guardarAsistencia(asistencia,socio);
+         Date date = Date.valueOf(fecha);
+        asistencia = new Asistencia(socio, clase, fecha);
+        asistData.guardarAsistencia(asistencia,socio,date,clase);
     }//GEN-LAST:event_jbConfirmarActionPerformed
 
     private void jcbHorarioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbHorarioItemStateChanged

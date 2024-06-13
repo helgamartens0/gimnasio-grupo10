@@ -372,6 +372,34 @@ public class SocioData {
 
         }
         return socio;
+    } 
+     public Socio buscarSocioDNI2(int dni_socio) {
+        String sql = "SELECT id_socio, dni_socio, nombre_socio,apellido_socio,edad_socio,correo_socio,telefono_socio,estado_socio FROM socio "
+                + "WHERE dni_socio = ?";
+        Socio socio = null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            
+            ps.setInt(1, dni_socio);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                socio = new Socio();
+                socio.setId_socio(rs.getInt("id_socio"));
+                socio.setDni_socio(Integer.parseInt(rs.getString("dni_socio")));
+                socio.setApellido_socio(rs.getString("apellido_socio"));
+                socio.setNombre_socio(rs.getString("nombre_socio"));
+                socio.setEdad_socio(rs.getInt("edad_socio"));
+                socio.setCorreo_socio(rs.getString("correo_socio"));
+                socio.setTelefono_socio(rs.getString("telefono_socio"));
+                socio.setEstado_socio(rs.getBoolean("estado_socio"));
+            }
+        } catch (SQLException ex) {
+//            Logger.getLogger(SocioData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "error al acceder a la tabla Socio");
+
+        }
+        return socio;
     }
 }
 

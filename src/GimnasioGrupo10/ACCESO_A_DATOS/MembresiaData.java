@@ -12,6 +12,8 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -186,5 +188,32 @@ public class MembresiaData {
             JOptionPane.showMessageDialog(null, "error al acceder a la tabla Membresia");
         }
         return membresias3;
+    }
+     
+      public boolean membresiaActual(int id_socio, LocalDate dia) {
+
+        String sql = "SELECT estado_membresia, fecha_inicio,fecha_fin FROM membresia JOIN socio ON (membresia.id_socio = socio.id_socio) WHERE membresia.id_socio=?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1,id_socio);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int estado = rs.getInt("estado_membresia");
+                LocalDate fechaInicio = rs.getDate("fecha_inicio").toLocalDate();
+                LocalDate fechaFin = rs.getDate("fecha_fin").toLocalDate();
+                if (estado == 1) {
+                    if ((dia.isEqual(fechaInicio) || dia.isAfter(fechaInicio))
+                            && (dia.isEqual(fechaFin) || dia.isBefore(fechaFin))) {
+                        JOptionPane.showMessageDialog(null, "TODO OK");
+                        return true;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+//            Logger.getLogger(MembresiaData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "error al acceder a la tabla Membresia");
+
+        }
+        return false;
     }
 }
