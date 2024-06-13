@@ -70,7 +70,7 @@ public class AsistenciaData {
 
         ArrayList<Socio> sociosClase = new ArrayList<>();
 
-        String sql =  "SELECT socio.id_socio, socio.dni_socio, socio.nombre_socio, socio.apellido_socio FROM asistencia, socio  WHERE asistencia.id_socio = socio.id_socio AND id_clase= 46 and socio.estado_socio=1;";
+        String sql =  "SELECT socio.id_socio, socio.dni_socio, socio.nombre_socio, socio.apellido_socio FROM asistencia, socio  WHERE asistencia.id_socio = socio.id_socio AND id_clase= ? AND socio.estado_socio=1;";
 
 
         try {

@@ -13,6 +13,7 @@ import GimnasioGrupo10.ENTIDADES.Clase;
 import GimnasioGrupo10.ENTIDADES.Socio;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -177,6 +178,8 @@ public class FormListadoPorClase extends javax.swing.JInternalFrame {
         jtTabla.setModel(modelo);
     }
     private void cargarDatos(){
+        
+        try{
         Clase selec= (Clase)jcbClase.getSelectedItem();
 //        listaSocios=(ArrayList) asistenciaD.obtenerSociosXClase(selec.getId_clase());
         listaSocios = asistenciaD.obtenerSociosXClase(selec.getId_clase());
@@ -188,7 +191,11 @@ public class FormListadoPorClase extends javax.swing.JInternalFrame {
            
             modelo.addRow(new Object[] {s.getId_socio(),s.getDni_socio(),s.getApellido_socio(),s.getNombre_socio()});
         }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e);
+        }
     }
+    
     private void borrarFilaTabla() {
         int indice = modelo.getRowCount() - 1;
         for (int i = indice; i >= 0; i--) {
