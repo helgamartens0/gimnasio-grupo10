@@ -91,7 +91,7 @@ public class MembresiaData {
         return membresias;
     }
 
-     public void renovarMembresia(int idMembresia, LocalDate nuevaFechaFin, int nuevaCantPases) {
+    public void renovarMembresia(int idMembresia, LocalDate nuevaFechaFin, int nuevaCantPases) {
         String sql = "UPDATE membresia SET id_membresia = ?, fecha_fin = ?, cantidad_pases = ?, estado_membresia = 1 WHERE id_membresia = ?";
 
         try {
@@ -109,7 +109,6 @@ public class MembresiaData {
     }
 
 //
-
     public void cancelarMembresia(int idMembresia) {
         String sql = "UPDATE membresia SET estado_membresia = FALSE WHERE id_membresia = ?";
 
@@ -125,14 +124,14 @@ public class MembresiaData {
 
         }
     }
-    
-     public List<Membresia> TodasMembresias() {
+
+    public List<Membresia> TodasMembresias() {
 
         List<Membresia> membresias2 = new ArrayList<>();
         String sql = "SELECT * "
                 + "FROM membresia "
                 + "JOIN socio ON membresia.id_socio = socio.id_socio ";
-                
+
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -158,8 +157,8 @@ public class MembresiaData {
         }
         return membresias2;
     }
-     
-     public List<Membresia> membresiasActivas() {
+
+    public List<Membresia> membresiasActivas() {
 
         List<Membresia> membresias3 = new ArrayList<>();
         String sql = "SELECT * "
@@ -190,13 +189,13 @@ public class MembresiaData {
         }
         return membresias3;
     }
-     
-      public boolean membresiaActual(int id_socio, LocalDate dia) {
+
+    public boolean membresiaActual(int id_socio, LocalDate dia) {
 
         String sql = "SELECT estado_membresia, fecha_inicio,fecha_fin FROM membresia JOIN socio ON (membresia.id_socio = socio.id_socio) WHERE membresia.id_socio=?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1,id_socio);
+            ps.setInt(1, id_socio);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 int estado = rs.getInt("estado_membresia");
@@ -216,5 +215,20 @@ public class MembresiaData {
 
         }
         return false;
+    }
+
+    public void restarPase(int idSocio) {
+        String sql = "UPDATE membresia SET cantidad_pases = cantidad_pases - 1";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idSocio);
+
+            ps.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "pase restado con exito");
+        } catch (SQLException e) {
+            System.out.println("Error al restar pase: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al restar pase");
+        }
     }
 }

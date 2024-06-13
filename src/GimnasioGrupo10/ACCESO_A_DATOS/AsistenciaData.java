@@ -31,7 +31,7 @@ public class AsistenciaData {
         clase = new Clase();
         membresia = new Membresia();
         asistencia = new Asistencia();
-   
+
     }
 
     public void guardarAsistencia(Asistencia asistencia, Socio socio, Date dia, Clase clase) {
@@ -48,6 +48,9 @@ public class AsistenciaData {
 
             if (rs.next()) {
                 asistencia.setId_asistencia(rs.getInt(1));
+                // Restar un pase de la membresía
+                MembresiaData membresiaData = new MembresiaData();
+                membresiaData.restarPase(socio.getId_socio());
                 JOptionPane.showMessageDialog(null, "asistencia agregada con exito");
 
             } else {
@@ -66,12 +69,12 @@ public class AsistenciaData {
             Logger.getLogger(AsistenciaData.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     public List<Socio> obtenerSociosXClase(int idClase) {
 
         ArrayList<Socio> sociosClase = new ArrayList<>();
 
-        String sql =  "SELECT socio.id_socio, socio.dni_socio, socio.nombre_socio, socio.apellido_socio FROM asistencia, socio  WHERE asistencia.id_socio = socio.id_socio AND id_clase= ? AND socio.estado_socio=1;";
-
+        String sql = "SELECT socio.id_socio, socio.dni_socio, socio.nombre_socio, socio.apellido_socio FROM asistencia, socio  WHERE asistencia.id_socio = socio.id_socio AND id_clase= ? AND socio.estado_socio=1;";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
