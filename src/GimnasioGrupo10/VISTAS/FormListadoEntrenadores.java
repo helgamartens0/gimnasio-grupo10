@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Bustos
  */
 public class FormListadoEntrenadores extends javax.swing.JInternalFrame {
-    
+
     private List<Entrenador> entrenadores;
     private List<Entrenador> listEntrenadores;
     private List<Entrenador> listEntrenadoresNombres;
@@ -29,6 +30,7 @@ public class FormListadoEntrenadores extends javax.swing.JInternalFrame {
     private EntrenadorData entData = new EntrenadorData();
     private DefaultTableModel modelo;
     private Map<String, Entrenador> mapEntrenadores = new HashMap<>();
+
     /**
      * Creates new form FormListadoEntrenadores
      */
@@ -37,10 +39,10 @@ public class FormListadoEntrenadores extends javax.swing.JInternalFrame {
         modelo = new DefaultTableModel();
         armarCabeceraTabla();
         listEntrenadoresTabla = entData.listarEntrenadoresActivos();
-        listEntrenadores= entData.listarEntrenadoresActivos();
-        listEntrenadoresNombres= entData.listarEntrenadoresActivos();
-        listEntrenadoresEspecialidad= entData.listarEntrenadoresActivos();
-        cargaEntrenadores();      
+        listEntrenadores = entData.listarEntrenadoresActivos();
+        listEntrenadoresNombres = entData.listarEntrenadoresActivos();
+        listEntrenadoresEspecialidad = entData.listarEntrenadoresActivos();
+        cargaEntrenadores();
     }
 
     @SuppressWarnings("unchecked")
@@ -127,8 +129,8 @@ public class FormListadoEntrenadores extends javax.swing.JInternalFrame {
                 .addGap(65, 65, 65)
                 .addComponent(jbEntrenadores, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(85, 85, 85))
+                .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61))
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -175,7 +177,7 @@ public class FormListadoEntrenadores extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 //        
         borrarFilaTabla();
-        cargaPorNombre(); 
+        cargaPorNombre();
     }//GEN-LAST:event_jcbNombreActionPerformed
 
     private void jcbEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEspecialidadActionPerformed
@@ -189,12 +191,12 @@ public class FormListadoEntrenadores extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         borrarFilaTabla();
         listEntrenadoresTabla = entData.listarEntrenadoresActivos();
-        
+
         for (Entrenador ent : listEntrenadoresTabla) {
-         modelo.addRow(new Object[]{ent.getDni_entrenador(), ent.getNombre_entrenador(),
-                ent.getApellido_entrenador(),ent.getEspecialidad_entrenador()});
+            modelo.addRow(new Object[]{ent.getDni_entrenador(), ent.getNombre_entrenador(),
+                ent.getApellido_entrenador(), ent.getEspecialidad_entrenador()});
         }
-        
+
     }//GEN-LAST:event_jbEntrenadoresActionPerformed
 
     private void armarCabeceraTabla() {
@@ -203,30 +205,39 @@ public class FormListadoEntrenadores extends javax.swing.JInternalFrame {
         filaCabecera.add("Nombre");
         filaCabecera.add("Apellido");
         filaCabecera.add("Especialidad");
-        
+
         for (Object it : filaCabecera) {
             modelo.addColumn(it);
         }
         jtLista.setModel(modelo);
     }
-    
+
     private void cargaEntrenadores() {
+
+        Set<String> especialidadesUnicas = new HashSet<>();
+
         for (Entrenador item : listEntrenadores) {
             String name = item.getNombre_entrenador() + " " + item.getApellido_entrenador();
             jcbNombre.addItem(name);
-            jcbEspecialidad.addItem(item.getEspecialidad_entrenador());
+
+            especialidadesUnicas.add(item.getEspecialidad_entrenador());
+
             mapEntrenadores.put(name, item);
         }
-        
+       
+        for (String especialidad : especialidadesUnicas) {
+            jcbEspecialidad.addItem(especialidad);
+        }
+
     }
-    
+
     private void borrarFilaTabla() {
         int indice = modelo.getRowCount() - 1;
         for (int i = indice; i >= 0; i--) {
             modelo.removeRow(i);
         }
     }
-    
+
     private void cargaPorNombre() {
 //        String nombreSeleccionado = (String) jcbNombre.getSelectedItem();
 //        Entrenador ent = mapEntrenadores.get(nombreSeleccionado);
@@ -244,7 +255,7 @@ public class FormListadoEntrenadores extends javax.swing.JInternalFrame {
         }
 
     }
-    
+
     private void cargaPorEspecialidad() {
         String especialidad = (String) jcbEspecialidad.getSelectedItem();
         entrenadores = entData.buscarEntrenadorEspecialidad(especialidad);
