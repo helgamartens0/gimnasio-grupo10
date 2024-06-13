@@ -127,7 +127,8 @@ public class MembresiaData {
 
         List<Membresia> membresias2 = new ArrayList<>();
         String sql = "SELECT * "
-                + "FROM membresia ";
+                + "FROM membresia "
+                + "JOIN socio ON membresia.id_socio = socio.id_socio ";
                 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -137,7 +138,7 @@ public class MembresiaData {
 
                 Membresia membresia = new Membresia();
                 membresia.setId_membresia(rs.getInt("id_membresia"));
-                Socio socio = socData.buscarSocioId(rs.getInt("id_socio"));
+                Socio socio = socData.buscarTodosLosSociosId(rs.getInt("id_socio"));
                 membresia.setSocio(socio);
                 membresia.setCantidad_pases(rs.getInt("cantidad_pases"));
                 membresia.setFecha_inicio(rs.getDate("fecha_inicio").toLocalDate());
@@ -170,7 +171,7 @@ public class MembresiaData {
 
                 Membresia membresia = new Membresia();
                 membresia.setId_membresia(rs.getInt("id_membresia"));
-                Socio socio = socData.buscarSocioId(rs.getInt("id_socio"));
+                Socio socio = socData.buscarTodosLosSociosId(rs.getInt("id_socio"));
                 membresia.setSocio(socio);
                 membresia.setCantidad_pases(rs.getInt("cantidad_pases"));
                 membresia.setFecha_inicio(rs.getDate("fecha_inicio").toLocalDate());

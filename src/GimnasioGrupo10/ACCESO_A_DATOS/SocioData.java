@@ -338,6 +338,41 @@ public class SocioData {
         }
         return socios;
     }
+    
+     public Socio buscarTodosLosSociosId(int id_socio) {
+        String sql = "SELECT dni_socio,nombre_socio,apellido_socio,edad_socio,correo_socio,telefono_socio,estado_socio FROM socio "
+                + "WHERE id_socio = ?";
+        Socio socio = null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            /*en la consulta SQL, reemplaza el primer signo de interrogación (?) con el valor de id_socio*/
+            ps.setInt(1, id_socio);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                socio = new Socio();
+
+                socio.setId_socio(id_socio);
+                socio.setDni_socio(rs.getInt("dni_socio"));
+                socio.setApellido_socio(rs.getString("apellido_socio"));
+                socio.setNombre_socio(rs.getString("nombre_socio"));
+                socio.setEdad_socio(rs.getInt("edad_socio"));
+                socio.setCorreo_socio(rs.getString("correo_socio"));
+                socio.setTelefono_socio(rs.getString("telefono_socio"));
+                socio.setEstado_socio(rs.getBoolean("estado_socio"));
+
+//                JOptionPane.showMessageDialog(null, "Socio encontrado con exito!!!");
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe ese socio");
+            }
+        } catch (SQLException ex) {
+//            Logger.getLogger(SocioData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "error al acceder a la tabla Socio");
+
+        }
+        return socio;
+    }
 }
 
             
