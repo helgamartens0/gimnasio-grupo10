@@ -227,43 +227,33 @@ public class FormListadoEntrenadores extends javax.swing.JInternalFrame {
         }
     }
     
-    private void cargaPorNombre(){
+    private void cargaPorNombre() {
 //        String nombreSeleccionado = (String) jcbNombre.getSelectedItem();
 //        Entrenador ent = mapEntrenadores.get(nombreSeleccionado);
 //       
-         
-            String nombreSeleccionado = (String) jcbNombre.getSelectedItem();
-            Entrenador ent = mapEntrenadores.get(nombreSeleccionado);
-            if(ent != null){
-                Entrenador entrenadorEncontrado = entData.buscarEntrenadorPorId(ent.getId_entrenador());
-                if(entrenadorEncontrado != null){
-                    borrarFilaTabla();
-                    modelo.addRow(new Object[]{ent.getDni_entrenador(), ent.getNombre_entrenador(),
-                    ent.getApellido_entrenador(),ent.getEspecialidad_entrenador()});
-                }
+
+        String nombreSeleccionado = (String) jcbNombre.getSelectedItem();
+        Entrenador ent = mapEntrenadores.get(nombreSeleccionado);
+        if (ent != null) {
+            Entrenador entrenadorEncontrado = entData.buscarEntrenadorPorId(ent.getId_entrenador());
+            if (entrenadorEncontrado != null) {
+                borrarFilaTabla();
+                modelo.addRow(new Object[]{ent.getDni_entrenador(), ent.getNombre_entrenador(),
+                    ent.getApellido_entrenador(), ent.getEspecialidad_entrenador()});
             }
-            
-           
+        }
+
     }
     
-    private void cargaPorEspecialidad(){
+    private void cargaPorEspecialidad() {
         String especialidad = (String) jcbEspecialidad.getSelectedItem();
         entrenadores = entData.buscarEntrenadorEspecialidad(especialidad);
-        
-         for (Entrenador ent : entrenadores) {
-             modelo.addRow(new Object[]{ent.getDni_entrenador(), ent.getNombre_entrenador(),
-                ent.getApellido_entrenador(),ent.getEspecialidad_entrenador()});  
+
+        for (Entrenador ent : entrenadores) {
+            modelo.addRow(new Object[]{ent.getDni_entrenador(), ent.getNombre_entrenador(),
+                ent.getApellido_entrenador(), ent.getEspecialidad_entrenador()});
+        }
     }
-    }
-    
-//    private void cargaPorEspecialidad(){
-//        String nombreSeleccionado = (String) jcbNombre.getSelectedItem();
-//        Entrenador ent = mapEntrenadores.get(nombreSeleccionado);
-//        entData.buscarEntrenadorEspecialidad(ent.getEspecialidad_entrenador());
-//         
-//            modelo.addRow(new Object[]{ent.getDni_entrenador(), ent.getNombre_entrenador(),
-//                ent.getApellido_entrenador(),ent.getEspecialidad_entrenador()});     
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
