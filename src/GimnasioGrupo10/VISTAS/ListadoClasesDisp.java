@@ -69,6 +69,7 @@ public class ListadoClasesDisp extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jtClasesDisp.setEnabled(false);
         jScrollPane1.setViewportView(jtClasesDisp);
 
         jbSalir.setText("SALIR");

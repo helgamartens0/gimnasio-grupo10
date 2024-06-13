@@ -229,6 +229,7 @@ public class FormClase extends javax.swing.JInternalFrame {
             Clase clase = new Clase(nombre_clase, entrenador, horario, capacidad, estado);
             claseData.cargarClase(clase);
             JOptionPane.showMessageDialog(this, "clase cargada con exito");
+            limpiarCampos();
 
         } catch (NumberFormatException e) {
 //            JOptionPane.showMessageDialog(this,"se ingreso un numero invalido");

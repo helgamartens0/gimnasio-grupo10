@@ -294,6 +294,7 @@ public class FormAsistencia extends javax.swing.JInternalFrame {
          Date date = Date.valueOf(fecha);
         asistencia = new Asistencia(socio, clase, fecha);
         asistData.guardarAsistencia(asistencia,socio,date,clase);
+        limpiarCampos();
     }//GEN-LAST:event_jbConfirmarActionPerformed
 
     private void jcbHorarioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbHorarioItemStateChanged
@@ -328,6 +329,16 @@ public class FormAsistencia extends javax.swing.JInternalFrame {
             jcbHorario.addItem(horario);
         }
 
+    }
+    
+    public void limpiarCampos(){
+        jtApellido.setText("");
+        jtCapacidad.setText("");
+        jtDni.setText("");
+        jtEntrenador.setText("");
+        jtNombre.setText("");
+        jtNombreClase.setText("");
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
