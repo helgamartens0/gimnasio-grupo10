@@ -236,7 +236,8 @@ public class FormEntrenador extends javax.swing.JInternalFrame {
             if (entrenador != null) {
                 jtNombre.setText(entrenador.getNombre_entrenador());
                 jtApellido.setText(entrenador.getApellido_entrenador());
-                jtDNI.setText(entrenador.getDni_entrenador());
+         
+                jtDNI.setText(String.valueOf(entrenador.getDni_entrenador()));
                 jtEspecialidad.setText(entrenador.getEspecialidad_entrenador());
                 jrbEstado.setSelected(entrenador.isEstado_entrenador());
             } else {
@@ -264,13 +265,13 @@ public class FormEntrenador extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 
         try {
-            String dni = jtDNI.getText();
+            Integer dni = Integer.parseInt(jtDNI.getText());
             String apellido = jtApellido.getText();
             String nombre = jtNombre.getText();
             String especialidad = jtEspecialidad.getText();
             Boolean estado = jrbEstado.isSelected();
 
-            if (dni.isEmpty() || apellido.isEmpty() || nombre.isEmpty() || especialidad.isEmpty()) {
+            if ( apellido.isEmpty() || nombre.isEmpty() || especialidad.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "NO puede haber campos vacios.");
             } else {
                 

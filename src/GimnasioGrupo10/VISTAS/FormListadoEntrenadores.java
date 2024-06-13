@@ -8,6 +8,7 @@ package GimnasioGrupo10.VISTAS;
 import GimnasioGrupo10.ACCESO_A_DATOS.EntrenadorData;
 import GimnasioGrupo10.ENTIDADES.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 public class FormListadoEntrenadores extends javax.swing.JInternalFrame {
     
     private List<Entrenador> listEntrenadores;
+    private List<Entrenador> listEntrenadoresTabla;
     private EntrenadorData entData = new EntrenadorData();
     private DefaultTableModel modelo;
 
@@ -28,7 +30,8 @@ public class FormListadoEntrenadores extends javax.swing.JInternalFrame {
         initComponents();
         modelo = new DefaultTableModel();
         armarCabeceraTabla();
-        listEntrenadores = entData.listarEntrenadoresActivos();
+        listEntrenadoresTabla = entData.listarEntrenadoresActivos();
+        listEntrenadores= entData.listarEntrenadoresActivos();
         cargaEntrenadores();      
     }
 
@@ -162,23 +165,24 @@ public class FormListadoEntrenadores extends javax.swing.JInternalFrame {
 
     private void jcbNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbNombreActionPerformed
         // TODO add your handling code here:
-        
+//        
         borrarFilaTabla();
-        cargaPorNombre(); 
+//        cargaPorNombre(); 
     }//GEN-LAST:event_jcbNombreActionPerformed
 
     private void jcbEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEspecialidadActionPerformed
         // TODO add your handling code here:
-        
+//        
         borrarFilaTabla();
-        cargaPorEspecialidad();
+//        cargaPorEspecialidad();
     }//GEN-LAST:event_jcbEspecialidadActionPerformed
 
     private void jbEntrenadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEntrenadoresActionPerformed
         // TODO add your handling code here:
-        listEntrenadores = entData.listarEntrenadoresActivos();
+        borrarFilaTabla();
+        listEntrenadoresTabla = entData.listarEntrenadoresActivos();
         
-        for (Entrenador ent : listEntrenadores) {
+        for (Entrenador ent : listEntrenadoresTabla) {
          modelo.addRow(new Object[]{ent.getDni_entrenador(), ent.getNombre_entrenador(),
                 ent.getApellido_entrenador(),ent.getEspecialidad_entrenador()});
         }
@@ -204,6 +208,7 @@ public class FormListadoEntrenadores extends javax.swing.JInternalFrame {
             jcbNombre.addItem(name);
             jcbEspecialidad.addItem(item.getEspecialidad_entrenador());
         }
+        
     }
     
     private void borrarFilaTabla() {
@@ -213,21 +218,21 @@ public class FormListadoEntrenadores extends javax.swing.JInternalFrame {
         }
     }
     
-    private void cargaPorNombre(){
-        Entrenador ent = (Entrenador) jcbNombre.getSelectedItem();
-        entData.buscarEntrenadorPorId(ent.getId_entrenador());
-         
-            modelo.addRow(new Object[]{ent.getDni_entrenador(), ent.getNombre_entrenador(),
-                ent.getApellido_entrenador(),ent.getEspecialidad_entrenador()});     
-    }
-    
-    private void cargaPorEspecialidad(){
-        Entrenador ent = (Entrenador) jcbEspecialidad.getSelectedItem();
-        entData.buscarEntrenadorEspecialidad(ent.getEspecialidad_entrenador());
-         
-            modelo.addRow(new Object[]{ent.getDni_entrenador(), ent.getNombre_entrenador(),
-                ent.getApellido_entrenador(),ent.getEspecialidad_entrenador()});     
-    }
+//    private void cargaPorNombre(){
+//        Entrenador ent = (Entrenador) jcbNombre.getSelectedItem();
+//        entData.buscarEntrenadorPorId(ent.getId_entrenador());
+//         
+//            modelo.addRow(new Object[]{ent.getDni_entrenador(), ent.getNombre_entrenador(),
+//                ent.getApellido_entrenador(),ent.getEspecialidad_entrenador()});     
+//    }
+//    
+//    private void cargaPorEspecialidad(){
+//        Entrenador ent = (Entrenador) jcbEspecialidad.getSelectedItem();
+//        entData.buscarEntrenadorEspecialidad(ent.getEspecialidad_entrenador());
+//         
+//            modelo.addRow(new Object[]{ent.getDni_entrenador(), ent.getNombre_entrenador(),
+//                ent.getApellido_entrenador(),ent.getEspecialidad_entrenador()});     
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;

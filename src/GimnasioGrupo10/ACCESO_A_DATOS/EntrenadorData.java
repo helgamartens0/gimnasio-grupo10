@@ -29,7 +29,7 @@ public class EntrenadorData {
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, entrenador.getDni_entrenador());
+            ps.setInt(1, entrenador.getDni_entrenador());
             ps.setString(2, entrenador.getNombre_entrenador());
             ps.setString(3, entrenador.getApellido_entrenador());
             ps.setString(4, entrenador.getEspecialidad_entrenador());
@@ -61,7 +61,7 @@ public class EntrenadorData {
             if (rs.next()) {
                 entren = new Entrenador();
                 entren.setId_entrenador(rs.getInt("id_entrenador"));
-                entren.setDni_entrenador(rs.getString("dni_entrenador"));
+                entren.setDni_entrenador(rs.getInt("dni_entrenador"));
                 entren.setNombre_entrenador(rs.getString("nombre_entrenador"));
                 entren.setApellido_entrenador(rs.getString("apellido_entrenador"));
                 entren.setEspecialidad_entrenador(rs.getString("especialidad_entrenador"));
@@ -91,7 +91,7 @@ public class EntrenadorData {
             while (rs.next()) {
                 Entrenador entrenador = new Entrenador();
                 entrenador.setId_entrenador(rs.getInt("id_entrenador"));
-                entrenador.setDni_entrenador(rs.getString("dni_entrenador"));
+                entrenador.setDni_entrenador(rs.getInt("dni_entrenador"));
                 entrenador.setNombre_entrenador(rs.getString("nombre_entrenador"));
                 entrenador.setApellido_entrenador(rs.getString("apellido_entrenador"));
                 entrenador.setEspecialidad_entrenador(rs.getString("especialidad_entrenador"));
@@ -122,7 +122,7 @@ public class EntrenadorData {
                     entrenador = new Entrenador();
 
                     entrenador.setId_entrenador(rs.getInt("id_entrenador"));
-                    entrenador.setDni_entrenador(rs.getString("dni_entrenador"));
+                    entrenador.setDni_entrenador(rs.getInt("dni_entrenador"));
                     entrenador.setNombre_entrenador(rs.getString("nombre_entrenador"));
                     entrenador.setApellido_entrenador(rs.getString("apellido_entrenador"));
                     entrenador.setEspecialidad_entrenador(rs.getString("especialidad_entrenador"));
@@ -156,7 +156,7 @@ public class EntrenadorData {
                 do {
                     entrenador = new Entrenador();
                     entrenador.setId_entrenador(rs.getInt("id_entrenador"));
-                    entrenador.setDni_entrenador(rs.getString("dni_entrenador"));
+                    entrenador.setDni_entrenador(rs.getInt("dni_entrenador"));
                     entrenador.setNombre_entrenador(rs.getString("nombre_entrenador"));
                     entrenador.setApellido_entrenador(rs.getString("apellido_entrenador"));
                     entrenador.setEspecialidad_entrenador(rs.getString("especialidad_entrenador"));
@@ -189,7 +189,7 @@ public class EntrenadorData {
                 do {
                     entrenador = new Entrenador();
                     entrenador.setId_entrenador(rs.getInt("id_entrenador"));
-                    entrenador.setDni_entrenador(rs.getString("dni_entrenador"));
+                    entrenador.setDni_entrenador(rs.getInt("dni_entrenador"));
                     entrenador.setNombre_entrenador(rs.getString("nombre_entrenador"));
                     entrenador.setApellido_entrenador(rs.getString("apellido_entrenador"));
                     entrenador.setEspecialidad_entrenador(rs.getString("especialidad_entrenador"));
@@ -222,7 +222,7 @@ public class EntrenadorData {
                 do {
                     entrenador = new Entrenador();
                     entrenador.setId_entrenador(rs.getInt("id_entrenador"));
-                    entrenador.setDni_entrenador(rs.getString("dni_entrenador"));
+                    entrenador.setDni_entrenador(rs.getInt("dni_entrenador"));
                     entrenador.setNombre_entrenador(rs.getString("nombre_entrenador"));
                     entrenador.setApellido_entrenador(rs.getString("apellido_entrenador"));
                     entrenador.setEspecialidad_entrenador(rs.getString("especialidad_entrenador"));
