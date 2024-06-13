@@ -242,7 +242,7 @@ public class FormAsistencia extends javax.swing.JInternalFrame {
         try {
             int dni = Integer.parseInt(jtDni.getText());
             socio = socioData.buscarSocioDNI2(dni);
-            socio.toString();
+//            socio.toString();
 //            int id_socio1 = socio.getId_socio();
 //            JOptionPane.showMessageDialog(this, id_socio1);
 
