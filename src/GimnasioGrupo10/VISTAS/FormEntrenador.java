@@ -239,6 +239,8 @@ public class FormEntrenador extends javax.swing.JInternalFrame {
                 jtDNI.setText(entrenador.getDni_entrenador());
                 jtEspecialidad.setText(entrenador.getEspecialidad_entrenador());
                 jrbEstado.setSelected(entrenador.isEstado_entrenador());
+            } else {
+                limpiarCampos();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e);
