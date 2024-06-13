@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FormListadoEntrenadores extends javax.swing.JInternalFrame {
     
+    private List<Entrenador> entrenadores;
     private List<Entrenador> listEntrenadores;
     private List<Entrenador> listEntrenadoresNombres;
     private List<Entrenador> listEntrenadoresEspecialidad;
@@ -181,7 +182,7 @@ public class FormListadoEntrenadores extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 //        
         borrarFilaTabla();
-//        cargaPorEspecialidad();
+        cargaPorEspecialidad();
     }//GEN-LAST:event_jcbEspecialidadActionPerformed
 
     private void jbEntrenadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEntrenadoresActionPerformed
@@ -243,6 +244,16 @@ public class FormListadoEntrenadores extends javax.swing.JInternalFrame {
             }
             
            
+    }
+    
+    private void cargaPorEspecialidad(){
+        String especialidad = (String) jcbEspecialidad.getSelectedItem();
+        entrenadores = entData.buscarEntrenadorEspecialidad(especialidad);
+        
+         for (Entrenador ent : entrenadores) {
+             modelo.addRow(new Object[]{ent.getDni_entrenador(), ent.getNombre_entrenador(),
+                ent.getApellido_entrenador(),ent.getEspecialidad_entrenador()});  
+    }
     }
     
 //    private void cargaPorEspecialidad(){
