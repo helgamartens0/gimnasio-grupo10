@@ -37,6 +37,7 @@ public class Menuu extends javax.swing.JFrame {
         jmiMembresia = new javax.swing.JMenuItem();
         jmiClase = new javax.swing.JMenuItem();
         jmiEntrenador = new javax.swing.JMenuItem();
+        jmiAsistencia = new javax.swing.JCheckBoxMenuItem();
         jmConsultas = new javax.swing.JMenu();
         jmiListClase = new javax.swing.JMenuItem();
         jmiListEntrenador = new javax.swing.JMenuItem();
@@ -105,6 +106,15 @@ public class Menuu extends javax.swing.JFrame {
             }
         });
         jmAdministracion.add(jmiEntrenador);
+
+        jmiAsistencia.setSelected(true);
+        jmiAsistencia.setText("Asistencia");
+        jmiAsistencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiAsistenciaActionPerformed(evt);
+            }
+        });
+        jmAdministracion.add(jmiAsistencia);
 
         jMenuBar1.add(jmAdministracion);
 
@@ -281,6 +291,15 @@ public class Menuu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jmiBusquedaClasesActionPerformed
 
+    private void jmiAsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAsistenciaActionPerformed
+     escritorio.removeAll();
+        escritorio.repaint();
+        FormAsistencia fa = new FormAsistencia();
+        fa.setVisible(true);
+        escritorio.add(fa);
+        escritorio.moveToFront(fa);        // TODO add your handling code here:
+    }//GEN-LAST:event_jmiAsistenciaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -323,6 +342,7 @@ public class Menuu extends javax.swing.JFrame {
     private javax.swing.JMenu jmConsultas;
     private javax.swing.JMenu jmSalir;
     private javax.swing.JMenu jmSocio;
+    private javax.swing.JCheckBoxMenuItem jmiAsistencia;
     private javax.swing.JCheckBoxMenuItem jmiBusquedaClases;
     private javax.swing.JMenuItem jmiClase;
     private javax.swing.JMenuItem jmiEntrenador;

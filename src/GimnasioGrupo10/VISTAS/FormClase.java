@@ -20,7 +20,7 @@ public class FormClase extends javax.swing.JInternalFrame {
 
     private ClaseData claseData;
     private EntrenadorData entrenadorData = new EntrenadorData();
-    
+
     private Clase clas = null;
     private ArrayList<Entrenador> listaE = entrenadorData.listarEntrenadoresActivos();
 
@@ -53,7 +53,6 @@ public class FormClase extends javax.swing.JInternalFrame {
         jlNombre = new javax.swing.JLabel();
         jbNuevo = new javax.swing.JButton();
         jbGuardar = new javax.swing.JButton();
-        jbEliminar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
         jcbHorario = new javax.swing.JComboBox<>();
         jcbEntrenador = new javax.swing.JComboBox<>();
@@ -109,9 +108,6 @@ public class FormClase extends javax.swing.JInternalFrame {
             }
         });
 
-        jbEliminar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jbEliminar.setText("Eliminar");
-
         jbSalir.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jbSalir.setText("Salir");
         jbSalir.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -130,36 +126,40 @@ public class FormClase extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jlClase, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jlClase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlDNIEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlCapacidad)
-                            .addComponent(jlEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jrbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtNombre)
-                            .addComponent(jcbHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jcbEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jbNuevo)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbGuardar)
-                        .addGap(10, 10, 10)
-                        .addComponent(jbEliminar)
-                        .addGap(48, 48, 48)
-                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jlDNIEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jlNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jlHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jlCapacidad)
+                                    .addComponent(jlEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(34, 34, 34))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jbNuevo)
+                                .addGap(46, 46, 46)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtNombre)
+                                .addComponent(jcbHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jcbEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jbGuardar)
+                                    .addComponent(jrbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(201, 201, 201)
+                                .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,7 +190,6 @@ public class FormClase extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbNuevo)
                     .addComponent(jbGuardar)
-                    .addComponent(jbEliminar)
                     .addComponent(jbSalir))
                 .addContainerGap(82, Short.MAX_VALUE))
         );
@@ -215,9 +214,9 @@ public class FormClase extends javax.swing.JInternalFrame {
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
 
         try {
-            if(jtNombre.getText().isEmpty() || jcbEntrenador.getSelectedIndex()==-1 || jtCapacidad.getText().isEmpty()
-                    || jcbHorario.getSelectedIndex()==-1){
-                JOptionPane.showMessageDialog(this,"no pueden haber campos vacios!!");
+            if (jtNombre.getText().isEmpty() || jcbEntrenador.getSelectedIndex() == -1 || jtCapacidad.getText().isEmpty()
+                    || jcbHorario.getSelectedIndex() == -1) {
+                JOptionPane.showMessageDialog(this, "no pueden haber campos vacios!!");
                 return;
             }
             String nombre_clase = jtNombre.getText();
@@ -226,12 +225,11 @@ public class FormClase extends javax.swing.JInternalFrame {
             LocalTime horario = (LocalTime) jcbHorario.getSelectedItem();
             boolean estado = jrbEstado.isSelected();
 
-        
 //public Clase(int id_clase, String nombre_clase, Entrenador entrenador, LocalTime hora_clase, int capacidad_clase, boolean estado_clase) {
             Clase clase = new Clase(nombre_clase, entrenador, horario, capacidad, estado);
             claseData.cargarClase(clase);
-            JOptionPane.showMessageDialog(this,"clase cargada con exito");
-            
+            JOptionPane.showMessageDialog(this, "clase cargada con exito");
+
         } catch (NumberFormatException e) {
 //            JOptionPane.showMessageDialog(this,"se ingreso un numero invalido");
 //            JOptionPane.showMessageDialog(null, e);
@@ -257,9 +255,13 @@ public class FormClase extends javax.swing.JInternalFrame {
         jrbEstado.setSelected(false);
     }
 
+
+
     private void cargarHorarios() {
         // Lista de horarios disponibles
-        List<LocalTime> horarios = new ArrayList<>();
+
+        ArrayList<LocalTime> horarios = new ArrayList<>();
+
         // Agregar horarios desde las 8:00 hasta las 20:00, con intervalos de una hora
         LocalTime hora = LocalTime.of(8, 0);
         while (hora.isBefore(LocalTime.of(20, 0))) {
@@ -271,6 +273,7 @@ public class FormClase extends javax.swing.JInternalFrame {
         }
     }
 
+
     private void cargarEntrenadores() {
         for (Entrenador entr : listaE) {
             jcbEntrenador.addItem(entr);
@@ -279,7 +282,6 @@ public class FormClase extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;

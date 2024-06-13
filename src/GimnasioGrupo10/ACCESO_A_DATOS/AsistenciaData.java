@@ -5,9 +5,12 @@
  */
 package GimnasioGrupo10.ACCESO_A_DATOS;
 
-
 import GimnasioGrupo10.ENTIDADES.Asistencia;
+import GimnasioGrupo10.ENTIDADES.Membresia;
+import GimnasioGrupo10.ENTIDADES.Socio;
+
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -15,15 +18,15 @@ import javax.swing.JOptionPane;
 public class AsistenciaData {
 
     private Connection con = null;
-
+    
     public AsistenciaData() {
         con = Conexion.getConexion();
     }
 
-      public void guardarAsistencia(Asistencia asistencia) {
+    public void guardarAsistencia(Asistencia asistencia,Socio socio) {
         String sqlInsertAsistencia = "INSERT INTO asistencia (id_socio, id_clase, fecha_asistencia) VALUES (?, ?, ?)";
         String sqlCheckCapacidad = "SELECT capacidad_clase, (SELECT COUNT(*) FROM asistencia WHERE id_clase=?) AS asistencias_actuales FROM clase WHERE id_clase = ?";
-        String sqlCheckMembresia = "SELECT * FROM membresia WHERE id_socio = ? AND ? BETWEEN fecha_inicio AND fecha_fin AND estado_membresia = true";
+        String sqlCheckMembresia = "SELECT estado_membresia FROM membresia WHERE id_socio = ?";
         String sqlUpdatePases = "UPDATE membresia SET cantidad_pases = cantidad_pases - 1 WHERE id_membresia = ?";
 
         try {
@@ -49,11 +52,12 @@ public class AsistenciaData {
             }
 
             // Verificar membresía activa y pases disponibles
-            psMembresia.setInt(1, asistencia.getSocio().getId_socio());
-            psMembresia.setDate(2, Date.valueOf(asistencia.getFecha_asistencia()));
-
+            int idSoc = socio.getId_socio();
+            psMembresia.setInt(1, idSoc);
+            
             ResultSet rsMembresia = psMembresia.executeQuery();
             if (rsMembresia.next()) {
+                
                 int cantidadPases = rsMembresia.getInt("cantidad_pases");
                 int idMembresia = rsMembresia.getInt("id_membresia");
 
@@ -75,14 +79,13 @@ public class AsistenciaData {
                     JOptionPane.showMessageDialog(null, "asistencia agregada con exito");
 
                 }
-
                 // Actualizar los pases disponibles
                 PreparedStatement psUpdatePases = con.prepareStatement(sqlUpdatePases);
                 psUpdatePases.setInt(1, idMembresia);
                 psUpdatePases.executeUpdate();
 
             } else {
-                JOptionPane.showMessageDialog(null, "El socio no tiene una membresía activa en la fecha de la clase.");
+                JOptionPane.showMessageDialog(null, "El socio no tiene una membresía activa \n ERROR ASISTENCIA DATA.");
             }
 
         } catch (SQLException ex) {
@@ -91,6 +94,4 @@ public class AsistenciaData {
         }
 
     }
-    
-    
 }
