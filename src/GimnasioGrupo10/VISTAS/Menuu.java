@@ -34,6 +34,7 @@ public class Menuu extends javax.swing.JFrame {
         jmSocio = new javax.swing.JMenu();
         jmiFormSocio = new javax.swing.JMenuItem();
         jmAdministracion = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jmiMembresia = new javax.swing.JMenuItem();
         jmiClase = new javax.swing.JMenuItem();
         jmiEntrenador = new javax.swing.JMenuItem();
@@ -57,7 +58,7 @@ public class Menuu extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 655, Short.MAX_VALUE)
+            .addGap(0, 761, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,6 +83,14 @@ public class Menuu extends javax.swing.JFrame {
         jMenuBar1.add(jmSocio);
 
         jmAdministracion.setText("ADMINISTRACION");
+
+        jMenuItem1.setText("Nueva Membresia");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jmAdministracion.add(jMenuItem1);
 
         jmiMembresia.setText("Membresia");
         jmiMembresia.addActionListener(new java.awt.event.ActionListener() {
@@ -178,7 +187,7 @@ public class Menuu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,6 +309,16 @@ public class Menuu extends javax.swing.JFrame {
         escritorio.moveToFront(fa);        // TODO add your handling code here:
     }//GEN-LAST:event_jmiAsistenciaActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        
+        escritorio.removeAll();
+        escritorio.repaint();
+        FormMembresia fMembresia = new FormMembresia();
+        fMembresia.setVisible(true);
+        escritorio.add(fMembresia);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -338,6 +357,7 @@ public class Menuu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu jmAdministracion;
     private javax.swing.JMenu jmConsultas;
     private javax.swing.JMenu jmSalir;

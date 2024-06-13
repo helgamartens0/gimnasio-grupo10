@@ -122,4 +122,68 @@ public class MembresiaData {
 
         }
     }
+    
+     public List<Membresia> TodasMembresias() {
+
+        List<Membresia> membresias2 = new ArrayList<>();
+        String sql = "SELECT * "
+                + "FROM membresia ";
+                
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Membresia membresia = new Membresia();
+                membresia.setId_membresia(rs.getInt("id_membresia"));
+                Socio socio = socData.buscarSocioId(rs.getInt("id_socio"));
+                membresia.setSocio(socio);
+                membresia.setCantidad_pases(rs.getInt("cantidad_pases"));
+                membresia.setFecha_inicio(rs.getDate("fecha_inicio").toLocalDate());
+                membresia.setFecha_fin(rs.getDate("fecha_fin").toLocalDate());
+                membresia.setCosto_membresia(rs.getDouble("costo_membresia"));
+                membresia.setEstado_membresia(rs.getBoolean("estado_membresia"));
+
+                membresias2.add(membresia);
+            }
+        } catch (SQLException e) {
+//            System.out.println("error " + e);
+            JOptionPane.showMessageDialog(null, "error al acceder a la tabla Membresia");
+
+        }
+        return membresias2;
+    }
+     
+     public List<Membresia> membresiasActivas() {
+
+        List<Membresia> membresias3 = new ArrayList<>();
+        String sql = "SELECT * "
+                + "FROM membresia "
+                + "JOIN socio ON membresia.id_socio = socio.id_socio "
+                + "WHERE membresia.estado_membresia = 1";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Membresia membresia = new Membresia();
+                membresia.setId_membresia(rs.getInt("id_membresia"));
+                Socio socio = socData.buscarSocioId(rs.getInt("id_socio"));
+                membresia.setSocio(socio);
+                membresia.setCantidad_pases(rs.getInt("cantidad_pases"));
+                membresia.setFecha_inicio(rs.getDate("fecha_inicio").toLocalDate());
+                membresia.setFecha_fin(rs.getDate("fecha_fin").toLocalDate());
+                membresia.setCosto_membresia(rs.getDouble("costo_membresia"));
+                membresia.setEstado_membresia(rs.getBoolean("estado_membresia"));
+
+                membresias3.add(membresia);
+            }
+        } catch (SQLException e) {
+//            System.out.println("error " + e);
+            JOptionPane.showMessageDialog(null, "error al acceder a la tabla Membresia");
+        }
+        return membresias3;
+    }
 }
