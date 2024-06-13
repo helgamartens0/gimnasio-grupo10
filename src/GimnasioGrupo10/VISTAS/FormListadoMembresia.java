@@ -64,13 +64,13 @@ public class FormListadoMembresia extends javax.swing.JInternalFrame {
 
         jTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7"
             }
         ));
         jScrollPane1.setViewportView(jTabla);
@@ -244,35 +244,42 @@ public class FormListadoMembresia extends javax.swing.JInternalFrame {
 
     private void jbRenovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRenovarActionPerformed
         // TODO add your handling code here:
-        try {
 
-            int filaSeleccionada = jTabla.getSelectedRow();
-            if (filaSeleccionada != -1) {
-                Socio soc = (Socio) jcbMembresia.getSelectedItem();
-                int cantPases = (Integer) modelo.getValueAt(filaSeleccionada, 1);
-                Date fechaDate = (Date) modelo.getValueAt(filaSeleccionada, 2);
-                LocalDate fechaInc = fechaDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                Date fechaDate2 = (Date) modelo.getValueAt(filaSeleccionada, 3);
-                LocalDate fechaFin = fechaDate2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                Double valor = (Double) (modelo.getValueAt(filaSeleccionada, 4));
-                Boolean estado = (Boolean) modelo.getValueAt(filaSeleccionada, 5);
-                Membresia membresia = new Membresia(soc, cantPases, fechaInc, fechaFin, valor, estado);
-
-                memData.renovarMembresia(membresia.getId_membresia(), fechaFin, cantPases);
-                borrarFilaTabla();
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e);
+            try {
+        int filaSeleccionada = jTabla.getSelectedRow();
+        if (filaSeleccionada == -1) {
+            JOptionPane.showMessageDialog(null, "Por favor seleccione una fila.");
+            return;
         }
+
+        Socio soc = (Socio) jcbMembresia.getSelectedItem();
+        int cantPases = (Integer) modelo.getValueAt(filaSeleccionada, 2);
+
+        Date fechaDate = (Date) modelo.getValueAt(filaSeleccionada, 3);
+        LocalDate fechaInc = fechaDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        Date fechaDate2 = (Date) modelo.getValueAt(filaSeleccionada, 4);
+        LocalDate fechaFin = fechaDate2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        Double valor = (Double) modelo.getValueAt(filaSeleccionada, 5);
+        Boolean estado = (Boolean) modelo.getValueAt(filaSeleccionada, 6);
+
+        Membresia membresia = new Membresia(soc, cantPases, fechaInc, fechaFin, valor, estado);
+
+        memData.renovarMembresia(membresia.getId_membresia(), fechaFin, cantPases);
+        
+        borrarFilaTabla();
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+    }
+        
     }//GEN-LAST:event_jbRenovarActionPerformed
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
         // TODO add your handling code here:
 
         try {
-            jTabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-            jTabla.setRowSelectionAllowed(true);
-
             int filaSeleccionada = jTabla.getSelectedRow();
             if (filaSeleccionada != -1) {
 
