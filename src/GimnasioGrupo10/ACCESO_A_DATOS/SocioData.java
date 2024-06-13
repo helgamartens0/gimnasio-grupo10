@@ -53,7 +53,7 @@ public class SocioData {
         }
     }
 
-    public List<Socio> listarSociosActivos() {
+    public ArrayList<Socio> listarSociosActivos() {
         ArrayList<Socio> socios = new ArrayList<>();
         String sql = "SELECT `id_socio`, `dni_socio`, `nombre_socio`, `apellido_socio`, `edad_socio`, `correo_socio`, `telefono_socio`, `estado_socio`"
                 + " FROM `socio` WHERE estado_socio=1";
