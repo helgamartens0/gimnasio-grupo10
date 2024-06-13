@@ -306,6 +306,38 @@ public class SocioData {
             JOptionPane.showMessageDialog(null,"Error al acceder a la tabla socio");
         }
     }
+    
+    public List<Socio> listarTodosLosSocios() {
+        ArrayList<Socio> socios = new ArrayList<>();
+        
+        String sql = "SELECT `id_socio`, `dni_socio`, `nombre_socio`, `apellido_socio`, `edad_socio`, `correo_socio`, `telefono_socio`, `estado_socio`"
+                + " FROM `socio`";
+//        String sql = "SELECT dni_socio,nombre_socio,apellido_socio,edad_socio,correo_socio,telefono_socio,estado_socio "
+//                + " FROM socio WHERE estado_socio = 1";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Socio socio = new Socio();
+
+                socio.setId_socio(rs.getInt("id_socio"));
+                socio.setDni_socio(rs.getInt("dni_socio"));
+                socio.setNombre_socio(rs.getString("nombre_socio"));
+                socio.setApellido_socio(rs.getString("apellido_socio"));
+                socio.setEdad_socio(rs.getInt("edad_socio"));
+                socio.setCorreo_socio(rs.getString("correo_socio"));
+                socio.setTelefono_socio(rs.getString("telefono_socio"));
+                socio.setEstado_socio(true);
+
+                socios.add(socio);
+            }
+        } catch (SQLException ex) {
+//            Logger.getLogger(SocioData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "error al acceder a la tabla Socio");
+        }
+        return socios;
+    }
 }
 
             

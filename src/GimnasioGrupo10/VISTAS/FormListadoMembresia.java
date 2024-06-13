@@ -5,17 +5,12 @@
  */
 package GimnasioGrupo10.VISTAS;
 
-import GimnasioGrupo10.ACCESO_A_DATOS.MembresiaData;
-import GimnasioGrupo10.ACCESO_A_DATOS.SocioData;
-import GimnasioGrupo10.ENTIDADES.Membresia;
-import GimnasioGrupo10.ENTIDADES.Socio;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import javax.swing.JOptionPane;
-import javax.swing.ListSelectionModel;
+import GimnasioGrupo10.ACCESO_A_DATOS.*;
+import GimnasioGrupo10.ENTIDADES.*;
+import java.awt.Component;
+import java.time.*;
+import java.util.*;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -179,12 +174,12 @@ public class FormListadoMembresia extends javax.swing.JInternalFrame {
                 .addComponent(jlTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcbMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbMembresias, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addComponent(jbMembActivas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(59, 59, 59)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -244,38 +239,47 @@ public class FormListadoMembresia extends javax.swing.JInternalFrame {
 
     private void jbRenovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRenovarActionPerformed
         // TODO add your handling code here:
-        cargaTodasMembresias();
-        int filaSeleccionada = jTabla.getSelectedRow();
-        if (filaSeleccionada != -1) {
-            Membresia mem = (Membresia) jcbMembresia.getSelectedItem();
-            int cantPases = (Integer) modelo.getValueAt(filaSeleccionada, 1);
-            Date fechaDate = (Date) modelo.getValueAt(filaSeleccionada, 2);
-            LocalDate fechaInc = fechaDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            Date fechaDate2 = (Date) modelo.getValueAt(filaSeleccionada, 3);
-            LocalDate fechaFin = fechaDate2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            Double valor = (Double) (modelo.getValueAt(filaSeleccionada, 4));
-            Boolean estado = (Boolean) modelo.getValueAt(filaSeleccionada, 5);
-            Membresia membresia = new Membresia(mem.getSocio(), cantPases, fechaInc, fechaFin, valor, estado);
-
-            memData.renovarMembresia(membresia.getId_membresia(), fechaFin, cantPases);
+        try {
             borrarFilaTabla();
+            cargaTodasMembresias();
+            int filaSeleccionada = jTabla.getSelectedRow();
+            if (filaSeleccionada != -1) {
+                Socio soc = (Socio) jcbMembresia.getSelectedItem();
+                int cantPases = (Integer) modelo.getValueAt(filaSeleccionada, 1);
+                Date fechaDate = (Date) modelo.getValueAt(filaSeleccionada, 2);
+                LocalDate fechaInc = fechaDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                Date fechaDate2 = (Date) modelo.getValueAt(filaSeleccionada, 3);
+                LocalDate fechaFin = fechaDate2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                Double valor = (Double) (modelo.getValueAt(filaSeleccionada, 4));
+                Boolean estado = (Boolean) modelo.getValueAt(filaSeleccionada, 5);
+                Membresia membresia = new Membresia(soc, cantPases, fechaInc, fechaFin, valor, estado);
+
+                memData.renovarMembresia(membresia.getId_membresia(), fechaFin, cantPases);
+                borrarFilaTabla();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e);
         }
     }//GEN-LAST:event_jbRenovarActionPerformed
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
         // TODO add your handling code here:
-        cargaMembresiasActivas();
-        jTabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        jTabla.setRowSelectionAllowed(true);
 
-        int filaSeleccionada = jTabla.getSelectedRow();
-        if (filaSeleccionada != -1) {
+        try {
+            cargaMembresiasActivas();
+            jTabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            jTabla.setRowSelectionAllowed(true);
 
-            int idMembresia = (Integer) modelo.getValueAt(filaSeleccionada, 0);
-            memData.cancelarMembresia(idMembresia);
-            borrarFilaTabla();
+            int filaSeleccionada = jTabla.getSelectedRow();
+            if (filaSeleccionada != -1) {
+
+                int idMembresia = (Integer) modelo.getValueAt(filaSeleccionada, 0);
+                memData.cancelarMembresia(idMembresia);
+                borrarFilaTabla();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e);
         }
-
     }//GEN-LAST:event_jbCancelarActionPerformed
 
     private void armarCabeceraTabla() {
@@ -302,52 +306,93 @@ public class FormListadoMembresia extends javax.swing.JInternalFrame {
     }
 
     private void cargaCBSocio() {
-        for (Socio item : socios) {
-            //String name = item.getNombre_socio() + " " + item.getApellido_socio();
-            jcbMembresia.addItem(item);
+        
+        try {
+            jcbMembresia.setRenderer(new SocioListCellRenderer());
+            for (Socio item : socios) {
+                //String name = item.getNombre_socio() + " " + item.getApellido_socio();
+                jcbMembresia.addItem(item);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e);
         }
     }
 
     private void cargaMembresias() {
-        Socio socio = (Socio) jcbMembresia.getSelectedItem();
-        String name = socio.getNombre_socio() + " " + socio.getApellido_socio();
-        membresias = memData.membresiaPorSocio(socio.getId_socio());
+        
+        try {
+            Socio socio = (Socio) jcbMembresia.getSelectedItem();
+            String name = socio.getNombre_socio() + " " + socio.getApellido_socio();
+            membresias = memData.membresiaPorSocio(socio.getId_socio());
 
-        for (Membresia mem : membresias) {
-            modelo.addRow(new Object[]{mem.getId_membresia(), name, mem.getCantidad_pases(),
-                mem.getFecha_inicio(), mem.getFecha_fin(),
-                mem.getCosto_membresia(), mem.isEstado_membresia()});
+            for (Membresia mem : membresias) {
+                modelo.addRow(new Object[]{mem.getId_membresia(), name, mem.getCantidad_pases(),
+                    mem.getFecha_inicio(), mem.getFecha_fin(),
+                    mem.getCosto_membresia(), mem.isEstado_membresia()});
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e);
         }
     }
 
     private void cargaTodasMembresias() {
 
-        try{
-        membresias2 = memData.TodasMembresias();
+        try {
+            membresias2 = memData.TodasMembresias();
 
-        for (Membresia mem2 : membresias2) {
-            String name = mem2.getSocio().getNombre_socio() + " " + mem2.getSocio().getApellido_socio();
+            for (Membresia mem2 : membresias2) {
+                String name = mem2.getSocio().getNombre_socio() + " " + mem2.getSocio().getApellido_socio();
 
-            modelo.addRow(new Object[]{mem2.getId_membresia(), name, mem2.getCantidad_pases(),
-                mem2.getFecha_inicio(), mem2.getFecha_fin(),
-                mem2.getCosto_membresia(), mem2.isEstado_membresia()});
-        }
-        } catch(Exception e){
+                modelo.addRow(new Object[]{mem2.getId_membresia(), name, mem2.getCantidad_pases(),
+                    mem2.getFecha_inicio(), mem2.getFecha_fin(),
+                    mem2.getCosto_membresia(), mem2.isEstado_membresia()});
+            }
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e);
         }
     }
 
     private void cargaMembresiasActivas() {
 
-        membresias3 = memData.membresiasActivas();
+        try {
+            membresias3 = memData.membresiasActivas();
+            for (Membresia mem3 : membresias3) {
+                String name = mem3.getSocio().getNombre_socio() + " " + mem3.getSocio().getApellido_socio();
 
-        for (Membresia mem3 : membresias3) {
-            String name = mem3.getSocio().getNombre_socio() + " " + mem3.getSocio().getApellido_socio();
-
-            modelo.addRow(new Object[]{mem3.getId_membresia(), name, mem3.getCantidad_pases(),
-                mem3.getFecha_inicio(), mem3.getFecha_fin(),
-                mem3.getCosto_membresia(), mem3.isEstado_membresia()});
+                modelo.addRow(new Object[]{mem3.getId_membresia(), name, mem3.getCantidad_pases(),
+                    mem3.getFecha_inicio(), mem3.getFecha_fin(),
+                    mem3.getCosto_membresia(), mem3.isEstado_membresia()});
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error " + e);
         }
+    }
+    
+     public class SocioListCellRenderer extends JLabel implements ListCellRenderer<Socio> {
+
+    public SocioListCellRenderer() {
+        setOpaque(true);
+    }
+
+    @Override
+    public Component getListCellRendererComponent(JList<? extends Socio> list, Socio value, int index, boolean isSelected, boolean cellHasFocus) {
+        if (value != null) {
+            setText("  " + value.getNombre_socio() + " " + value.getApellido_socio());
+        } else {
+            setText("");
+        }
+
+        if (isSelected) {
+            setBackground(list.getSelectionBackground());
+            setForeground(list.getSelectionForeground());
+        } else {
+            setBackground(list.getBackground());
+            setForeground(list.getForeground());
+        }
+
+        return this;
+    }
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
