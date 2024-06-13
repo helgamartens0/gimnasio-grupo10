@@ -12,6 +12,8 @@ import GimnasioGrupo10.ENTIDADES.Socio;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -22,12 +24,14 @@ public class AsistenciaData {
     private Clase clase;
     private Membresia membresia;
     private Asistencia asistencia;
+    private Socio socio;
 
     public AsistenciaData() {
         con = Conexion.getConexion();
         clase = new Clase();
         membresia = new Membresia();
         asistencia = new Asistencia();
+   
     }
 
     public void guardarAsistencia(Asistencia asistencia, Socio socio, Date dia, Clase clase) {
@@ -61,6 +65,34 @@ public class AsistenciaData {
         } catch (SQLException ex) {
             Logger.getLogger(AsistenciaData.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    public List<Socio> obtenerSociosXClase(int idClase) {
+
+        ArrayList<Socio> sociosClase = new ArrayList<>();
+
+        String sql =  "SELECT socio.id_socio, socio.dni_socio, socio.nombre_socio, socio.apellido_socio FROM asistencia, socio  WHERE asistencia.id_socio = socio.id_socio AND id_clase= 46 and socio.estado_socio=1;";
+
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idClase);
+            ResultSet resultado = ps.executeQuery();
+
+            while (resultado.next()) {
+
+                Socio socios = new Socio();
+                socios.setId_socio(resultado.getInt("id_socio"));
+                socios.setDni_socio(resultado.getInt("dni_socio"));
+                socios.setApellido_socio(resultado.getString("apellido_socio"));
+                socios.setNombre_socio(resultado.getString("nombre_socio"));
+                sociosClase.add(socios);
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a alguna tabla. " + ex);
+        }
+
+        return sociosClase;
     }
 }
 

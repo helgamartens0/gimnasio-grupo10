@@ -84,11 +84,12 @@ public class Clase {
     
     @Override
     public String toString() {
-        return "Clase{" + "id_clase=" + getId_clase() + ", nombre_clase=" + nombre_clase + ", entrenador=" + entrenador.getId_entrenador() + ", hora_clase=" + hora_clase + ", capacidad_clase=" + capacidad_clase + ", estado_clase=" + estado_clase + '}';
-    }
-    
-    public String toString2(){
+//        return "Clase{" + "id_clase=" + getId_clase() + ", nombre_clase=" + nombre_clase + ", entrenador=" + entrenador.getId_entrenador() + ", hora_clase=" + hora_clase + ", capacidad_clase=" + capacidad_clase + ", estado_clase=" + estado_clase + '}';
         return nombre_clase + " con " + entrenador.getNombre_entrenador()+ " ";
     }
     
+//    public String toString2(){
+//        return nombre_clase + " con " + entrenador.getNombre_entrenador()+ " ";
+//    }
+   
 }

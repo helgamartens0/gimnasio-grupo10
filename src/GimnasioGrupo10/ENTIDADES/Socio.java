@@ -5,6 +5,8 @@
  */
 package GimnasioGrupo10.ENTIDADES;
 
+import java.util.Objects;
+
 public class Socio {
     private int id_socio;
     private int dni_socio;
@@ -107,6 +109,17 @@ public class Socio {
     public String toString() {
         return "DATOS - SOCIO:" + "\ndni_socio=" + getDni_socio() + "\nnombre_socio=" + getNombre_socio() + "\napellido_socio=" + getApellido_socio() + "\nedad_socio=" + getEdad_socio() + "\ncorreo_socio=" + getCorreo_socio() + "\ntelefono_socio=" + getTelefono_socio() + "\nestado_socio=" + isEstado_socio();
     }
-    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Socio socio = (Socio) o;
+        return id_socio == socio.id_socio;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id_socio);
+    }
     
 }
