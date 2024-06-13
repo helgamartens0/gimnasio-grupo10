@@ -251,7 +251,7 @@ public class SocioData {
             ps.setString(5, socio.getCorreo_socio());
             ps.setString(6, socio.getTelefono_socio());
             ps.setInt(7, socio.getId_socio());
-<<<<<<< Updated upstream
+
 
             int exito = ps.executeUpdate();
             if (exito > 0) {
@@ -292,20 +292,7 @@ public class SocioData {
 
         }
         return socio;
-=======
-            
-            
-           
-           int exito = ps.executeUpdate();
-           if(exito>0){
-               
-               JOptionPane.showMessageDialog(null,"Socio modificado.");
-           }
-           
-       } catch (Exception e) {
-           JOptionPane.showMessageDialog(null, "Error al acceder a la tabla socio. " + e);
-       }
-   }
+    }
     public void altaSocio(int id){
         String sql="UPDATE `socio` SET estado_socio =1 WHERE id_socio=?";
         try {
@@ -318,9 +305,10 @@ public class SocioData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Error al acceder a la tabla socio");
         }
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     }
 }
+
+            
+      
+
+
