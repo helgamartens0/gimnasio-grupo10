@@ -245,8 +245,7 @@ public class FormListadoMembresia extends javax.swing.JInternalFrame {
     private void jbRenovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRenovarActionPerformed
         // TODO add your handling code here:
         try {
-            borrarFilaTabla();
-            cargaTodasMembresias();
+
             int filaSeleccionada = jTabla.getSelectedRow();
             if (filaSeleccionada != -1) {
                 Socio soc = (Socio) jcbMembresia.getSelectedItem();
@@ -271,7 +270,6 @@ public class FormListadoMembresia extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 
         try {
-            cargaMembresiasActivas();
             jTabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             jTabla.setRowSelectionAllowed(true);
 
